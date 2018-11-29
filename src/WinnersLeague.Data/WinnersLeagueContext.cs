@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WinnersLeague.Models;
 using WinnersLeague.Web.Areas.Identity.Data;
 
 namespace WinnersLeague.Web.Models
@@ -16,12 +17,28 @@ namespace WinnersLeague.Web.Models
         {
         }
 
+        public DbSet<Match> Matches { get; set; }
+
+        public DbSet<Team> Teams { get; set; }
+
+        public DbSet<League> Leagues { get; set; }
+
+        public DbSet<Stadium> Stadiums { get; set; }
+
+        public DbSet<Odd> Odds { get; set; }
+
+        public DbSet<Bet> Bets { get; set; }
+
+        public DbSet<Article> Articles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Stadium>()
+            .HasOne(a => a.Team)
+            .WithOne(a => a.Stadium)
+            .HasForeignKey<Team>(c => c.StadiumId);
+
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
 }
