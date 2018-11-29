@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WinnersLeague.Web.Models;
-using WinnersLeague.Web.Areas.Identity.Data;
+using WinnersLeague.Data;
+using WinnersLeague.Models;
 
 namespace WinnersLeague.Web
 {

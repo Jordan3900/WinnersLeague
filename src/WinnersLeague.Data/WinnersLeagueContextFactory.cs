@@ -8,7 +8,8 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Text;
-    using WinnersLeague.Web.Models;
+    using WinnersLeague.Models;
+
 
     public class WinnersLeagueContextFactory : IDesignTimeDbContextFactory<WinnersLeagueContext>
     {

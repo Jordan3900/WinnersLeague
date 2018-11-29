@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WinnersLeague.Web.Areas.Identity.Data;
+using WinnersLeague.Models;
 
 namespace WinnersLeague.Web.Areas.Identity.Pages.Account
 {

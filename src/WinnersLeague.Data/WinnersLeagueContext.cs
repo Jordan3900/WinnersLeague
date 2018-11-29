@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using WinnersLeague.Models;
-using WinnersLeague.Web.Areas.Identity.Data;
-
-namespace WinnersLeague.Web.Models
+﻿namespace WinnersLeague.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using WinnersLeague.Models;
+
+
     public class WinnersLeagueContext : IdentityDbContext<WinnersLeagueUser>
     {
         public WinnersLeagueContext(DbContextOptions<WinnersLeagueContext> options)

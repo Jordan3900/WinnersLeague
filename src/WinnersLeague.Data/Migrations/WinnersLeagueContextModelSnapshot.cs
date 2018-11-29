@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WinnersLeague.Web.Models;
+using WinnersLeague.Data;
 
 namespace WinnersLeague.Data.Migrations
 {

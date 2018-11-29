@@ -1,4 +1,5 @@
-﻿@inject SignInManager<WinnersLeagueUser> SignInManager
+﻿
+@inject SignInManager<WinnersLeagueUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
