@@ -13,6 +13,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WinnersLeague.Data;
 using WinnersLeague.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using WinnersLeague.Services;
+using WinnersLeague.Web.Middlewares.MiddlewareExtansions;
 
 namespace WinnersLeague.Web
 {
@@ -36,11 +39,23 @@ namespace WinnersLeague.Web
             });
 
             services.AddDbContext<WinnersLeagueContext>(options =>
-            options.UseSqlServer(
-                this.Configuration.GetConnectionString("DefaultConnection")));
+                 options.UseSqlServer(
+                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<WinnersLeagueUser>()
-                .AddEntityFrameworkStores<WinnersLeagueContext>();
+            services.AddIdentity<WinnersLeagueUser, IdentityRole>(opt =>
+            {
+                opt.SignIn.RequireConfirmedEmail = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredUniqueChars = 0;
+                opt.Password.RequiredLength = 3;
+            })
+                .AddEntityFrameworkStores<WinnersLeagueContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -59,6 +74,7 @@ namespace WinnersLeague.Web
                 app.UseHsts();
             }
 
+            app.UseSeedDataMiddleware();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

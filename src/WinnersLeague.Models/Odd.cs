@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-using WinnersLeague.Models.Enums;
+    using WinnersLeague.Models.Enums;
 
     public class Odd
     {

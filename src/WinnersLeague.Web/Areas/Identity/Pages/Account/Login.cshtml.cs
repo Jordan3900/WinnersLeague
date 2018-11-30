@@ -38,7 +38,7 @@ namespace WinnersLeague.Web.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
+            [Display(Name = "Email/Username")]
             public string Email { get; set; }
 
             [Required]
