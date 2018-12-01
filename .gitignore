@@ -328,3 +328,5 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/src/WinnersLeague.Web/appsettings.json
+/src/WinnersLeague.Web/appsettings.Development.json
