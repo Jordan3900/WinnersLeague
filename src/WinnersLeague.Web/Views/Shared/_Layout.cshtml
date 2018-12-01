@@ -6,8 +6,9 @@
     <title>@ViewData["Title"] - WinnersLeague.Web</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" type="text/css" href="/css/reset-css.css">
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -17,59 +18,69 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">WinnersLeague.Web</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+    <div class="container-flu">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY2BEBFTcLGVS5ZdHBUIcIYvVf9E26OtMMumB_pLlZJxGT4v91XA" width="30" height="30" class="d-inline-block align-top" alt="">
+                WinnersLeague
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
+        </nav>
+
+        <partial name="_CookieConsentPartial" />
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; 2018 - WinnersLeague.Web</p>
+            </footer>
         </div>
-    </nav>
 
-    <partial name="_CookieConsentPartial" />
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - WinnersLeague.Web</p>
-        </footer>
+        <environment include="Development">
+            <script src="~/js/jquery-3.3.1.min.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+            <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+            <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+            <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+            <script src="~/js/bootstrap.min.js"></script>
+            <script src="~/js/popper.min.js"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
     </div>
-
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
-
     @RenderSection("Scripts", required: false)
 </body>
 </html>
