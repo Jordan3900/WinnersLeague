@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SandBox", "SandBox\SandBox.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4E214EA3-3A55-4B2A-B490-2DD7F7DC9C7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinnersLeague.Services", "WinnersLeague.Services\WinnersLeague.Services.csproj", "{E002107B-47A2-4B58-910D-7A91A86A1F94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinnersLeague.Services", "WinnersLeague.Services\WinnersLeague.Services.csproj", "{E002107B-47A2-4B58-910D-7A91A86A1F94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinnersLeague.Common", "WinnersLeague.Common\WinnersLeague.Common.csproj", "{C1626583-225B-4802-9AB0-4589D1A1DB10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{E002107B-47A2-4B58-910D-7A91A86A1F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E002107B-47A2-4B58-910D-7A91A86A1F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E002107B-47A2-4B58-910D-7A91A86A1F94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1626583-225B-4802-9AB0-4589D1A1DB10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1626583-225B-4802-9AB0-4589D1A1DB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1626583-225B-4802-9AB0-4589D1A1DB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1626583-225B-4802-9AB0-4589D1A1DB10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{73CC9F7F-5437-4F82-9F03-679C920ED2CD} = {6B38F875-3A76-4B1E-866D-41AB2C19D462}
 		{2C43E2DA-0A93-44B2-ACE3-B01BD6929191} = {10D0D3E5-0FDB-469B-93B1-6881CE7E292F}
 		{E002107B-47A2-4B58-910D-7A91A86A1F94} = {4E214EA3-3A55-4B2A-B490-2DD7F7DC9C7D}
+		{C1626583-225B-4802-9AB0-4589D1A1DB10} = {6B38F875-3A76-4B1E-866D-41AB2C19D462}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A487417C-3AB8-4EFD-8F16-D8DFC8EB20E1}

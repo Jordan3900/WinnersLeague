@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WinnersLeague.Common\WinnersLeague.Common.csproj" />
     <ProjectReference Include="..\WinnersLeague.Models\WinnersLeague.Models.csproj" />
   </ItemGroup>
 

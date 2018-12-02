@@ -16,6 +16,7 @@ using WinnersLeague.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using WinnersLeague.Services;
 using WinnersLeague.Web.Middlewares.MiddlewareExtansions;
+using WinnersLeague.Common;
 
 namespace WinnersLeague.Web
 {
@@ -56,6 +57,7 @@ namespace WinnersLeague.Web
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
