@@ -330,3 +330,6 @@ ASALocalRun/
 .mfractor/
 /src/WinnersLeague.Web/appsettings.json
 /src/WinnersLeague.Web/appsettings.Development.json
+/src/WinnersLeague.Web/wwwroot
+/src/WinnersLeague.Web/wwwroot
+/src/WinnersLeague.Web/wwwroot/css
