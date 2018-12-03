@@ -13,7 +13,7 @@
         public string StadiumId { get; set; }
         public Stadium Stadium { get; set; }
 
-        public byte[] Logo { get; set; }
+        public string Logo { get; set; }
 
         public int Wins { get; set; }
 
