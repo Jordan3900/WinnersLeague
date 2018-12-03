@@ -1,6 +1,13 @@
-﻿@{
+﻿@using WinnersLeague.Models
+@model IEnumerable<Team>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <h1>@ViewData["Title"]</h1>
-
+@foreach (var item in Model)
+{
+    <h1>@item.Name</h1>
+    <h1>@item.Initials</h1>
+    <img src="@Url.Content(item.Logo)" alt="team-logo" height="30" width="30" />
+}

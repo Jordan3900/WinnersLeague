@@ -4,15 +4,23 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WinnersLeague.Data;
 using WinnersLeague.Web.Models;
 
 namespace WinnersLeague.Web.Controllers
 {
     public class HomeController : Controller
     {
+        public WinnersLeagueContext dbContext;
+
+        public HomeController(WinnersLeagueContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            return View(this.dbContext.Teams);
         }
 
         public IActionResult About()
