@@ -14,7 +14,7 @@
     public class SeedDataMiddleware
     {
         private readonly RequestDelegate next;
-        private const string JSON_FILE = @"Teams.json";
+        private const string JSON_FILE = @"Stadiums.json";
 
         public SeedDataMiddleware(RequestDelegate next)
         {
@@ -38,7 +38,42 @@
                  this.SeedTeams(dbContext);
             }
 
+            if (!dbContext.Leagues.Any())
+            {
+                this.SeedLeagues(dbContext);
+            }
+
+            if (!dbContext.Stadiums.Any())
+            {
+                this.SeedStadiums(dbContext);
+            }
+
             await this.next(context);
+        }
+
+        private void SeedStadiums(WinnersLeagueContext dbContext)
+        {
+            var json = File.ReadAllText(JSON_FILE);
+
+            var stadiums = JsonConvert.DeserializeObject<Stadium[]>(json);
+            dbContext.AddRange(stadiums);
+            dbContext.SaveChanges();
+        }
+
+        private void SeedLeagues(WinnersLeagueContext dbContext)
+        {
+            var teams = dbContext.Teams.ToArray();
+
+            var league = new League
+            {
+                Name = "Primier League",
+                Country = "England",
+                CountOfTeams = teams.Count(),
+                Teams = teams,
+            };
+
+            dbContext.Leagues.Add(league);
+            dbContext.SaveChanges();
         }
 
         private void SeedTeams(WinnersLeagueContext dbContext)
