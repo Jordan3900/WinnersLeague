@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WinnersLeague.Common\WinnersLeague.Common.csproj" />
+    <ProjectReference Include="..\WinnersLeague.Data\WinnersLeague.Data.csproj" />
+    <ProjectReference Include="..\WinnersLeague.Models\WinnersLeague.Models.csproj" />
+    <ProjectReference Include="..\WinnersLeague.Services.Models\WinnersLeague.Services.Models.csproj" />
+  </ItemGroup>
+
+</Project>

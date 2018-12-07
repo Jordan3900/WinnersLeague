@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "All";
+}
+
+<h2>All</h2>
+
+@foreach (var team in Model)
+{
+    <h1>@team.Initials</h1>
+    <h1>@team.Name</h1>
+    <img src="@Url.Content(team.Logo)" />
+    <h3>@team.Stadium</h3>
+}

@@ -10,12 +10,12 @@
     {
         public string Id { get; set; }
 
-        public WinnersLeagueUser Author { get; set; }
+        virtual public WinnersLeagueUser Author { get; set; }
 
         public string Content { get; set; }
 
         public string Title { get; set; }
 
-        public Match Match { get; set; }
+        virtual public Match Match { get; set; }
     }
 }

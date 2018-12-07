@@ -21,9 +21,9 @@
 
         public int CountOfTeams { get; set; }
 
-        public ICollection<Team> Teams { get; set; }
-
-        public ICollection<Match> Matches { get; set; }
+        virtual public ICollection<Team> Teams { get; set; }
+       
+        virtual public ICollection<Match> Matches { get; set; }
 
     }
 }

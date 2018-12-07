@@ -15,7 +15,7 @@
         public int Capacity { get; set; }
 
         public string TeamId { get; set; }
-        public Team Team { get; set; }
+        virtual public Team Team { get; set; }
 
         public string Picture { get; set; }
 

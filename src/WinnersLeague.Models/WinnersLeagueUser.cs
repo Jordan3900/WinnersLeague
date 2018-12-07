@@ -22,7 +22,7 @@ public class WinnersLeagueUser : IdentityUser
 
         public decimal Points { get; set; } = 200;
 
-        public ICollection<Bet> Bets { get; set; }
+        virtual public ICollection<Bet> Bets { get; set; }
 
         public decimal WinStats { get; set; }
     }

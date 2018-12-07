@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WinnersLeague.Data\WinnersLeague.Data.csproj" />
     <ProjectReference Include="..\WinnersLeague.Models\WinnersLeague.Models.csproj" />
+    <ProjectReference Include="..\WinnersLeague.Services.Data\WinnersLeague.Services.Data.csproj" />
     <ProjectReference Include="..\WinnersLeague.Services\WinnersLeague.Services.csproj" />
   </ItemGroup>
 

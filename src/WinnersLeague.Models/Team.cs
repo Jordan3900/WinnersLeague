@@ -8,10 +8,10 @@
 
         public string Initials { get; set; }
 
-        public League League { get; set; }
+        virtual public League League { get; set; }
 
         public string StadiumId { get; set; }
-        public Stadium Stadium { get; set; }
+        virtual public Stadium Stadium { get; set; }
 
         public string Logo { get; set; }
 

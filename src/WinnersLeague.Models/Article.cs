@@ -9,7 +9,7 @@ namespace WinnersLeague.Models
     {
         public string Id { get; set; }
 
-        public WinnersLeagueUser Author { get; set; }
+        virtual public WinnersLeagueUser Author { get; set; }
 
         public string Title { get; set; }
 

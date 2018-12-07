@@ -20,6 +20,6 @@
 
         public decimal AmountOfWin { get; set; }
 
-        public ICollection<Odd> Odds { get; set; }
+        virtual public ICollection<Odd> Odds { get; set; }
     }
 }

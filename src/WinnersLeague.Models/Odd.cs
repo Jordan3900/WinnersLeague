@@ -14,7 +14,7 @@
 
         public decimal OddValue { get; set; }
 
-        public Match Match { get; set; }
+        virtual public Match Match { get; set; }
 
         public bool IsWinning { get; set; }
     }

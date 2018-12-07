@@ -16,11 +16,11 @@
 
         public string Id { get; set; }
 
-        public Team HomeTeam { get; set; }
-
-        public Team AwayTeam { get; set; }
-
-        public League League { get; set; }
+        virtual public Team HomeTeam { get; set; }
+     
+        virtual public Team AwayTeam { get; set; }
+      
+        virtual public League League { get; set; }
 
         public string Description { get; set; }
 
@@ -36,7 +36,7 @@
 
         public MatchType Type { get; set; }
 
-        public ICollection<Odd> Odds { get; set; }
-        public ICollection<Comments> Comments { get; set; }
+        virtual public ICollection<Odd> Odds { get; set; }
+        virtual public ICollection<Comments> Comments { get; set; }
     }
 }

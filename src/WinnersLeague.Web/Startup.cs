@@ -17,6 +17,11 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using WinnersLeague.Services;
 using WinnersLeague.Web.Middlewares.MiddlewareExtansions;
 using WinnersLeague.Common;
+using WinnersLeague.Services.Data.Contracts;
+using WinnersLeague.Services.Data;
+using AutoMapper;
+using WinnersLeague.Services.Mapping;
+using WinnersLeague.Services.Models;
 
 namespace WinnersLeague.Web
 {
@@ -32,6 +37,10 @@ namespace WinnersLeague.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            AutoMapperConfig.RegisterMappings(
+               typeof(TeamViewModel).Assembly
+           );
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -41,7 +50,7 @@ namespace WinnersLeague.Web
 
             services.AddDbContext<WinnersLeagueContext>(options =>
                  options.UseSqlServer(
-                     Configuration.GetConnectionString("DefaultConnection")));
+                     Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies());
 
             services.AddIdentity<WinnersLeagueUser, IdentityRole>(opt =>
             {
@@ -60,6 +69,9 @@ namespace WinnersLeague.Web
             services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddScoped<ITeamService, TeamsService>();
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,7 +9,7 @@
     using System.IO;
     using System.Text;
     using WinnersLeague.Models;
-
+    
 
     public class WinnersLeagueContextFactory : IDesignTimeDbContextFactory<WinnersLeagueContext>
     {
@@ -24,7 +24,7 @@
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            builder.UseSqlServer(connectionString);
+            builder.UseLazyLoadingProxies().UseSqlServer(connectionString);
 
             // Stop client query evaluation
             builder.ConfigureWarnings(w => w.Throw(RelationalEventId.QueryClientEvaluationWarning));
