@@ -5,12 +5,12 @@
     using System.Text;
     using WinnersLeague.Services.Models;
 
-    public interface ILeagueService
+    public interface IArticleService
     {
-        IEnumerable<LeagueViewModel> GetAll();
+        IEnumerable<ArticleViewModel> GetAll();
 
-        bool IsLeagueIdValid(string leagueId);
+        bool IsArtilcleIdValid(string articleId);
 
-        string GetLeagueId(string name);
+        string GetArticleId(string title);
     }
 }

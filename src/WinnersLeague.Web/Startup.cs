@@ -75,6 +75,7 @@ namespace WinnersLeague.Web
             services.AddScoped<ITeamService, TeamsService>();
             services.AddScoped<IStadiumService, StadiumService>();
             services.AddScoped<ILeagueService, LeagueService>();
+            services.AddScoped<IArticleService, ArticleService>();
            
         }
 
