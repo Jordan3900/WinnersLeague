@@ -10,12 +10,13 @@
         <ul class="navbar-nav ml-auto">
             @if (this.User.IsInRole("Admin"))
             {
-                <li class="dropdown">
-                    <a class="dropdown-toggle nav-link" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Admin Panel</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a class="nav-link" asp-area="Admin" asp-controller="Teams" asp-action="All">Teams</a></li>
-                    </ul>
-                </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle nav-link" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Admin Panel</a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a class="nav-link" asp-area="Admin" asp-controller="Teams" asp-action="All">Teams</a></li>
+                    <li><a class="nav-link" asp-area="Admin" asp-controller="Stadiums" asp-action="All">Stadiums</a></li>
+                </ul>
+            </li>
             }
             <li class="nav-item">
                 <a asp-area="Identity" asp-page="/Account/Manage/Index" class="nav-link" title="Manage">Hello @UserManager.GetUserName(User)!</a>

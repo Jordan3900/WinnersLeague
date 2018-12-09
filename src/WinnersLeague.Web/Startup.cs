@@ -70,8 +70,11 @@ namespace WinnersLeague.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddScoped<ITeamService, TeamsService>();
             services.AddAutoMapper();
+
+            services.AddScoped<ITeamService, TeamsService>();
+            services.AddScoped<IStadiumService, StadiumService>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
