@@ -35,6 +35,14 @@
             return league.Id;
         }
 
+        public League GetLeague(string name)
+        {
+            var league = this.leagueRepository.All()
+                .FirstOrDefault(x => x.Name == name);
+
+            return league;
+        }
+
         public bool IsLeagueIdValid(string leagueId)
         {
             return this.leagueRepository.All()

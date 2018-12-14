@@ -66,12 +66,13 @@ namespace WinnersLeague.Web
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
+            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddAutoMapper();
 
+            services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
             services.AddScoped<ITeamService, TeamsService>();
             services.AddScoped<IStadiumService, StadiumService>();
             services.AddScoped<ILeagueService, LeagueService>();

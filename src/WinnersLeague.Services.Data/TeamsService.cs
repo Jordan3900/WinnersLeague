@@ -33,6 +33,13 @@
             return team.Id;
         }
 
+        public Team GetTeam(string name)
+        {
+            var team = this.teamRepository.All().FirstOrDefault(x => x.Name == name);
+
+            return team;
+        }
+
         public bool IsTeamIdValid(string teamId)
         {
             return this.teamRepository.All().Any(x => x.Id == teamId);

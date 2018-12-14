@@ -5,8 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using WinnersLeague.Models.Enums;
+    using WinnersLeague.Services.Mapping.Contracts;
 
-    public class Match
+
+    public class Match 
     {
         public Match()
         {
