@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using WinnersLeague.Models;
     using WinnersLeague.Services.Models;
 
     public interface IMatchService

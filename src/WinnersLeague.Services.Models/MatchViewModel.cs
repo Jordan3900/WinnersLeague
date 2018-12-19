@@ -12,11 +12,11 @@
     {
         public string Id { get; set; }
 
-         public Team HomeTeam { get; set; }
-            
-         public Team AwayTeam { get; set; }
+        public Team HomeTeam { get; set; }
 
-         public string League { get; set; }
+        public Team AwayTeam { get; set; }
+
+        public string League { get; set; }
 
         public string Description { get; set; }
 

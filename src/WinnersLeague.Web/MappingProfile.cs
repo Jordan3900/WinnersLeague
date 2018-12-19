@@ -25,6 +25,10 @@ namespace WinnersLeague.Web
                 .ForMember(x => x.HomeTeam, y => y.Ignore())
                 .ForMember(x => x.AwayTeam, y => y.Ignore())
                 .ForMember(x => x.League, y => y.Ignore());
+
+            CreateMap<Match, MatchViewModel>()
+                   .ForMember(x => x.League,
+                  m => m.MapFrom(c => c.League.Name));
         }
     }
 }

@@ -7,6 +7,7 @@ using WinnersLeague.Services.Data.Contracts;
 
 namespace WinnersLeague.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class ArticlesController : Controller
     {
         private readonly IArticleService articleService;
@@ -16,7 +17,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             this.articleService = articleService;
         }
 
-        [Area("Admin")]
+        
         public IActionResult All()
         {
             var articles = articleService.GetAll();

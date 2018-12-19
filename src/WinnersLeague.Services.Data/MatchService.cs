@@ -9,22 +9,28 @@
     using WinnersLeague.Services.Models;
     using System.Linq;
     using WinnersLeague.Services.Mapping;
+    using AutoMapper;
 
     public class MatchService : IMatchService
     {
         private readonly IRepository<Match> matchRepository;
+        private readonly IMapper mapper;
 
-        public MatchService(IRepository<Match> matchRepository)
+        public MatchService(IRepository<Match> matchRepository, IMapper mapper)
         {
             this.matchRepository = matchRepository;
+            this.mapper = mapper;
         }
 
         public IEnumerable<MatchViewModel> GetAll()
-        {
-            var matches = this.matchRepository.All()
-                .OrderBy(x => x.MatchStart).To<MatchViewModel>();
+        { 
 
-            return matches;
+           var matches = this.matchRepository.All().ToList();
+
+           var matchesViewModels = mapper.Map<List<Match>, List<MatchViewModel>>(matches);
+
+
+            return matchesViewModels;
         }
 
         public bool IsMatchIdValid(string matchId)
