@@ -1,4 +1,4 @@
-﻿namespace WinnersLeague.Models
+﻿namespace WinnersLeague.Web.Areas.Admin.Models.OddModels
 {
     using System;
     using System.Collections.Generic;
@@ -6,16 +6,12 @@
     using System.Threading.Tasks;
     using WinnersLeague.Models.Enums;
 
-    public class Odd
+    public class OddInputModel
     {
-        public string Id { get; set; }
-
         public OddType Type { get; set; }
 
         public decimal OddValue { get; set; }
 
-        virtual public Match Match { get; set; }
-
-        public bool IsWinning { get; set; } = false;
+        public string MatchId { get; set; }
     }
 }

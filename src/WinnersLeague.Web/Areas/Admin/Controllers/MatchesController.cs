@@ -33,6 +33,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             this.repository = repository;
         }
 
+        [AutoValidateAntiforgeryToken]
         public IActionResult All()
         {
             var matches = this.matchService.GetAll();

@@ -78,7 +78,7 @@ namespace WinnersLeague.Web
             services.AddScoped<ILeagueService, LeagueService>();
             services.AddScoped<IArticleService, ArticleService>();
             services.AddScoped<IMatchService, MatchService>();
-           
+            services.AddScoped<IOddService, OddService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

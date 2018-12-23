@@ -15,6 +15,8 @@
 
         public decimal OddValue { get; set; }
 
+        public string Match { get; set; }
+
         public bool IsWinning { get; set; }
     }
 }

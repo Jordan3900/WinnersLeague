@@ -11,5 +11,7 @@
         IEnumerable<MatchViewModel> GetAll();
 
         bool IsMatchIdValid(string matchId);
+
+        Match GetMatch(string matchId);
     }
 }

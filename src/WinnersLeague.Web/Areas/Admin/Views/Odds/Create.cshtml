@@ -1,4 +1,6 @@
-﻿@model WinnersLeague.Services.Models.OddViewModel
+﻿@using WinnersLeague.Models.Enums;
+@using WinnersLeague.Web.Areas.Admin.Models.OddModels
+@model WinnersLeague.Services.Models.OddViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -13,19 +15,27 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
-                <input asp-for="Type" class="form-control" />
+                <select asp-for="Type" asp-items="Html.GetEnumSelectList<OddType>()" class="form-control">
+                    <option disabled="disabled" selected="selected">-- Choose Suggestion --</option>
+                </select>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OddValue" class="control-label"></label>
                 <input asp-for="OddValue" class="form-control" />
                 <span asp-validation-for="OddValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Match" class="control-label"></label>
+                <select asp-for="Match" name="MatchId" class="form-control">
+                    <option disabled="disabled" selected="selected">-- Choose Match --</option>
+                    @foreach (var match in ViewData["Matches"] as IList<SelectMatchViewModel>)
+                    {
+                        <option value="@match.Id">@match.MatchName</option>
+                    }
+                </select>
+                <span asp-validation-for="Match" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -35,6 +45,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="All">Back to List</a>
 </div>
 

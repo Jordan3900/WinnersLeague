@@ -28,7 +28,8 @@ namespace WinnersLeague.Web
 
             CreateMap<Match, MatchViewModel>()
                    .ForMember(x => x.League,
-                  m => m.MapFrom(c => c.League.Name));
+                  m => m.MapFrom(c => c.League.Name))
+                  .ReverseMap();
         }
     }
 }

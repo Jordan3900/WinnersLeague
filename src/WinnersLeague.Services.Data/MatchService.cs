@@ -37,5 +37,11 @@
         {
             return this.matchRepository.All().Any(x => x.Id == matchId);
         }
+
+        public Match GetMatch(string matchId)
+        {
+            return this.matchRepository.All()
+                .FirstOrDefault(x => x.Id == matchId);
+        }
     }
 }
