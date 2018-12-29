@@ -8,7 +8,7 @@
     using WinnersLeague.Models;
     using WinnersLeague.Services.Mapping.Contracts;
 
-    public class ArticleViewModel : IMapFrom<League>, IHaveCustomMappings
+    public class ArticleViewModel : IMapFrom<Article>, IHaveCustomMappings
     {
         public string Id { get; set; }
 

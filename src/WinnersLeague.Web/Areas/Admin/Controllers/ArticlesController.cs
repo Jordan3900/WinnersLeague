@@ -52,7 +52,6 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
                 .FirstOrDefault(x => x.UserName == model.Author);
 
 
-
             var article = mapper.Map<Article>(model);
             article.Author = author;
 
