@@ -1,0 +1,20 @@
+﻿@using WinnersLeague.Services.Models
+@model ArticleViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="row d-flex justify-content-center">
+    <!-- Blog Post Content Column -->
+    <div class="col-lg-8 text-center">
+        <hr class="hr-1" />
+        <!-- Preview Image -->
+        <img class="img-responsive" src="@Model.Picture" alt="Picture">
+        <hr class="hr-1">
+        <!-- Post Content -->
+        <p class="lead font-weight-bold">@Model.Title</p>
+        <p>@Model.Content</p>
+        <div>
+            <button class="btn btn-primary" onclick="window.history.back()">Back</button>
+        </div>
+    </div>
+</div>
