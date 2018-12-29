@@ -18,7 +18,7 @@
         private readonly IMatchService matchService;
         private readonly IRepository<Odd> oddRepository;
         private readonly IMapper mapper;
-        private object x;
+
 
         public OddsController(IOddService oddService,
             IMatchService matchService,

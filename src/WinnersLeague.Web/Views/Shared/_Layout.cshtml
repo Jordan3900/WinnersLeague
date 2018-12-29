@@ -19,39 +19,43 @@
     </environment>
 </head>
 <body>
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">
-                <div class="container">
-                    <div class="row">
-                        <img src="@Url.Content("~/Images/soccer_ball_kick_pass_football-512.png")" width="40" height="40" class="d-inline-block align-top" alt="ball">
-                        <div class="inline"><h4>Winnners <br /> League</h4></div>
-                    </div>
-                </div>               
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse font-weight-bold" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="\">Home</a>
-                    </li>
-                </ul>
-                    <partial name="_LoginPartial" />
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            <div class="container">
+                <div class="row">
+                    <img src="@Url.Content("~/Images/soccer_ball_kick_pass_football-512.png")" width="40" height="40" class="d-inline-block align-top" alt="ball">
+                    <div class="inline"><h4>Winnners <br /> League</h4></div>
+                </div>
             </div>
-        </nav>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse font-weight-bold" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="\">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="All" asp-controller="Articles">Articles</a>
+                </li>
+            </ul>
+            <partial name="_LoginPartial" />
+        </div>
+    </nav>
 
-        <partial name="_CookieConsentPartial" />
+    <partial name="_CookieConsentPartial" />
 
-        <div class="container body-content mb-5 mt-3">
+    <div class="container-fluid">
+        <main class="container body-content mb-5 mt-3">
             @RenderBody()
             <hr class="hr-1" />
             <footer class="text-center">
                 <p>&copy; 2018 - Winners League All Rights Reserved.</p>
             </footer>
-        </div>
-
+        </main>
+    </div>
         <environment include="Development">
             <script src="~/js/jquery-3.3.1.min.js"></script>
             <script src="~/js/site.js" asp-append-version="true"></script>
@@ -76,7 +80,7 @@
             </script>
             <script src="~/js/site.min.js" asp-append-version="true"></script>
         </environment>
-    </div>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -15,6 +15,8 @@ namespace WinnersLeague.Models
 
         public string Content { get; set; }
 
+        public string Picture { get; set; }
+
         public string Source { get; set; }
     }
 }
