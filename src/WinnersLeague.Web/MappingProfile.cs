@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WinnersLeague.Models;
 using WinnersLeague.Services.Models;
 using WinnersLeague.Web.Areas.Admin.Models;
+using WinnersLeague.Web.Areas.Admin.Models.ArticleModels;
 
 namespace WinnersLeague.Web
 {
@@ -26,10 +27,17 @@ namespace WinnersLeague.Web
                 .ForMember(x => x.AwayTeam, y => y.Ignore())
                 .ForMember(x => x.League, y => y.Ignore());
 
+            CreateMap<League, LeagueViewModel>().ReverseMap();
+
+            CreateMap<Article, ArticleInputModel>()
+                .ReverseMap()
+                .ForMember(x => x.Author, y => y.Ignore());
+
             CreateMap<Match, MatchViewModel>()
                    .ForMember(x => x.League,
                   m => m.MapFrom(c => c.League.Name))
                   .ReverseMap();
+            
         }
     }
 }

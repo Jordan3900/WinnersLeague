@@ -8,7 +8,7 @@
 <h2>All</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-area="Admin" asp-controller="Articles" asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -20,13 +20,16 @@
                 @Html.DisplayNameFor(model => model.Author)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.ShortTitle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Content)
+                @Html.DisplayNameFor(model => model.ShortContent)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Source)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Picture)
             </th>
             <th></th>
         </tr>
@@ -41,13 +44,16 @@
                 @Html.DisplayFor(modelItem => item.Author)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.DisplayFor(modelItem => item.ShortTitle)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Content)
+                @Html.DisplayFor(modelItem => item.ShortContent)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Source)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Picture)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
