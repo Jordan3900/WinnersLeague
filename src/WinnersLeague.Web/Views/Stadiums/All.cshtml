@@ -1,0 +1,25 @@
+﻿@using WinnersLeague.Services.Models
+@model StadiumViewModel[]
+
+@{
+    ViewData["Title"] = "All";
+}
+<div class="row mt-3 text-center">
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        @if (i % 3 == 0 && i > 0)
+        {
+        @:</div>
+        @:<div class="row mt-3 text-center">
+        }
+              <div class="col-lg-4">
+                  <img class="rounded-circle" src="@Url.Content(Model[i].Picture)" alt="Generic placeholder image" width="140" height="140">
+                  <h2>@Model[i].Name</h2>
+                  @if (Model[i].Description != null)
+                  {
+                      <p>@Model[i].ShortDescription</p>
+                  }
+                  <p><a class="btn btn-secondary" href="#" role="button">Read More &raquo;</a></p>
+              </div>
+    }
+</div>

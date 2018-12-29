@@ -19,6 +19,8 @@
 
         public string Team { get; set; }
 
+        public string ShortDescription => this.Description.Substring(0, 100) + " ...";
+
         public string Picture { get; set; }
 
         public string Description { get; set; }
