@@ -25,5 +25,13 @@
 
             return View(stadiums);
         }
+
+        public IActionResult Details(string id)
+        {
+            var stadium = this.stadiumService.GetAll()
+                .FirstOrDefault(x => x.Id == id);
+
+            return View(stadium);
+        }
     }
 }

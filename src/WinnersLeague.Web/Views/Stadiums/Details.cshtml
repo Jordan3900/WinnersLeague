@@ -1,0 +1,21 @@
+﻿@using WinnersLeague.Services.Models
+@model StadiumViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="row d-flex justify-content-center">
+    <!-- Blog Post Content Column -->
+    <div class="col-lg-8 text-center">
+        <hr class="hr-1" />
+        <!-- Preview Image -->
+        <img class="img-thumbnail rounded-circle img-height" src="@Url.Content(Model.Picture)" alt="Picture">
+        <hr class="hr-1">
+        <!-- Post Content -->
+        <h4 class="text-center">@Model.Name</h4>
+        <p>@Model.Description</p>
+        <div>
+            <button class="btn btn-primary" onclick="window.history.back()">Back</button>
+        </div>
+    </div>
+</div>

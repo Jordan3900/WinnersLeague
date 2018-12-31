@@ -27,10 +27,10 @@
 
         public IActionResult Details(string id)
         {
-            var articles = this.articleService.GetAll()
+            var article = this.articleService.GetAll()
                 .FirstOrDefault(x => x.Id == id);
 
-            return View(articles);
+            return View(article);
         }
     }
 }
