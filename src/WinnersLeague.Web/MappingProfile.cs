@@ -31,7 +31,8 @@ namespace WinnersLeague.Web
 
             CreateMap<Article, ArticleInputModel>()
                 .ReverseMap()
-                .ForMember(x => x.Author, y => y.Ignore());
+                .ForMember(x => x.Author, y => y.Ignore())
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Match, MatchViewModel>()
                    .ForMember(x => x.League,

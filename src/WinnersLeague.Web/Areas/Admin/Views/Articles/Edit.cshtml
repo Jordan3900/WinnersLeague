@@ -1,0 +1,43 @@
+﻿@using WinnersLeague.Services.Models
+@model ArticleViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="row d-flex justify-content-center">
+    <!-- Blog Post Content Column -->
+    <div class="col-lg-8 text-center">
+        <hr class="hr-1" />
+        <!-- Preview Image -->
+        <img class="img-responsive" src="@Model.Picture" alt="Picture">
+        <hr class="hr-1">
+        <form asp-area="Admin" asp-controller="Articles" asp-action="Edit" asp-route-id="@Model.Id" method="post">
+            <!-- Post Content -->
+            <div class="form-group">
+                <label class="font-weight-bold" for="Title">Edit Author</label>
+                <select asp-for="Author" class="form-control">
+                    <option selected="selected" disabled="disabled">-- Choose Author --</option>
+                    @foreach (var name in ViewData["Authors"] as IList<string>)
+                    {
+                        <option>@name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold" for="Title">Edit Source</label>
+                <input class="lead font-weight-bold form-control" value="@Model.Source" name="Source">
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold" for="Title">Edit Title</label>
+                <input class="lead font-weight-bold form-control" name="Title" value="@Model.Title">
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold" for="Content">Edit Content</label>
+                <textarea class="form-control" name="Content" rows="6">@Model.Content</textarea>
+            </div>
+            <div>
+                <button class="btn btn-primary" type="submit">Edit</button>
+                <button class="btn btn-secondary" onclick="window.history.back()">Back</button>
+            </div>
+        </form>
+    </div>
+</div>

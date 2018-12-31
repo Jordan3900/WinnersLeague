@@ -61,6 +61,40 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
 
             return this.RedirectToAction("All", "Articles");
         }
+        [AutoValidateAntiforgeryToken]
+        public IActionResult Edit(string id)
+        {
+            var article = this.articleService.GetAll()
+                .FirstOrDefault(x => x.Id == id);
 
+            var authors = this.userRepository.All()
+               .Select(x => x.UserName)
+               .ToList();
+
+            ViewData["Authors"] = authors;
+
+            return View(article);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult Edit(ArticleInputModel model, string id)
+        {
+            var author = this.userRepository
+                .All()
+                .FirstOrDefault(x => x.UserName == model.Author);
+
+            var article = this.articleRepository.All()
+                .FirstOrDefault(x => x.Id == id);
+
+            article.Content = model.Content;
+            article.Title = model.Title;
+            article.Source = model.Source;
+            article.Author = author;
+
+            this.articleRepository.SaveChangesAsync();
+
+            return  this.RedirectToAction("All", "Articles");
+        }
     }
 }

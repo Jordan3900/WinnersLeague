@@ -35,7 +35,7 @@
                                     <a asp-action="Details" asp-controller="Articles" asp-route-id="@Model[i].Id" class="btn btn-sm btn-outline-secondary">View</a>
                                     @if (this.User.IsInRole("Admin"))
                                     {
-                                        <a  class="btn btn-sm btn-outline-secondary">Edit</a>
+                                        <a class="btn btn-sm btn-outline-secondary" asp-route-id="@Model[i].Id" asp-area="Admin" asp-action="Edit" asp-controller="Articles">Edit</a>
                                     }
                                 </div>
                             </div>
