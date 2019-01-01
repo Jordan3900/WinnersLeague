@@ -5,42 +5,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WinnersLeague.Data;
+using WinnersLeague.Services.Data.Contracts;
 using WinnersLeague.Web.Models;
 
 namespace WinnersLeague.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public WinnersLeagueContext dbContext;
+        private readonly IMatchService matchService;
 
-        public HomeController(WinnersLeagueContext dbContext)
+        public HomeController(IMatchService matchService)
         {
-            this.dbContext = dbContext;
+            this.matchService = matchService;
         }
 
         public IActionResult Index()
         {
-            return View(this.dbContext.Teams);
+            var matches = this.matchService.GetAll().Where(x => x.Id == "5b9b8596-62cb-42ee-acef-a3a44b8393f6");
+
+            return View(matches);
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

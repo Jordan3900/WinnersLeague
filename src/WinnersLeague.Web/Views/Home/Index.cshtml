@@ -1,7 +1,48 @@
-﻿@using WinnersLeague.Models
-@model IEnumerable<Team>
+﻿@using WinnersLeague.Services.Models
+@model IEnumerable<MatchViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <h1>@ViewData["Title"]</h1>
+<div class="row">
+    <div class="col-lg-8">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="col-md-6">Matches</th>
+                    <th class="col-md-1">1</th>
+                    <th class="col-md-1">X</th>
+                    <th class="col-md-1">2</th>
+                    <th class="col-md-1">U2.5</th>
+                    <th class="col-md-1">O2.5</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var match in Model)
+                {
+                    <tr>
+                        <td class="col-md-6">@match.HomeTeam.Name vs @match.AwayTeam.Name </td>
+                        <td class="col-md-1">@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.HomeWin).OddValue</td>
+                        <td class="col-md-1">2.5</td>
+                        <td class="col-md-1">2</td>
+                        <td class="col-md-1">U2.5</td>
+                        <td class="col-md-1">O2.5</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+</div>

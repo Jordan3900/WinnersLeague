@@ -56,7 +56,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Create(MatchInputModel model)
+        public async Task<IActionResult> Create(MatchInputModel model)
         {
             var league = this.leagueService.GetLeague(model.League);
             var homeTeam = this.teamService.GetTeam(model.HomeTeam);
@@ -67,8 +67,8 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             match.AwayTeam = awayTeam;
             match.League = league;
            
-            this.repository.AddAsync(match);
-            this.repository.SaveChangesAsync();
+            await this.repository.AddAsync(match);
+            await this.repository.SaveChangesAsync();
 
             return this.RedirectToAction("Create", "Matches");
         }

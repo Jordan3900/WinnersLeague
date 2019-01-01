@@ -45,7 +45,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ArticleInputModel model)
+        public async Task<IActionResult> Create(ArticleInputModel model)
         {
             var author = this.userRepository
                 .All()
@@ -56,8 +56,8 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             article.Author = author;
 
 
-            this.articleRepository.AddAsync(article);
-            this.articleRepository.SaveChangesAsync();
+            await this.articleRepository.AddAsync(article);
+            await this.articleRepository.SaveChangesAsync();
 
             return this.RedirectToAction("All", "Articles");
         }
@@ -78,7 +78,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Edit(ArticleInputModel model, string id)
+        public async Task<IActionResult> Edit(ArticleInputModel model, string id)
         {
             var author = this.userRepository
                 .All()
@@ -92,7 +92,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             article.Source = model.Source;
             article.Author = author;
 
-            this.articleRepository.SaveChangesAsync();
+            await this.articleRepository.SaveChangesAsync();
 
             return  this.RedirectToAction("All", "Articles");
         }

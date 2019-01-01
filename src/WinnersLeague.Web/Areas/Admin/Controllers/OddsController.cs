@@ -55,7 +55,7 @@
 
         [AutoValidateAntiforgeryToken]
         [HttpPost]
-        public IActionResult Create(OddInputModel oddInputModel)
+        public async Task<IActionResult> Create(OddInputModel oddInputModel)
         {
             var matchId = oddInputModel.MatchId;
 
@@ -79,8 +79,8 @@
                 Type = oddInputModel.Type
             };
 
-            this.oddRepository.AddAsync(odd);
-            this.oddRepository.SaveChangesAsync();
+           await this.oddRepository.AddAsync(odd);
+           await this.oddRepository.SaveChangesAsync();
 
 
             return this.RedirectToAction("All","Odds");

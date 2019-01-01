@@ -7,6 +7,7 @@ using WinnersLeague.Services.Data.Contracts;
 
 namespace WinnersLeague.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class TeamsController : Controller
     {
 
@@ -17,7 +18,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             this.teamService = teamService;
         }
 
-        [Area("Admin")]
+        
         public IActionResult All()
         {
             var teams = teamService.GetAll();
