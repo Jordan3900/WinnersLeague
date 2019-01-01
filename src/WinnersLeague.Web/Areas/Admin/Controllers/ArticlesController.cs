@@ -61,7 +61,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
 
             return this.RedirectToAction("All", "Articles");
         }
-        [AutoValidateAntiforgeryToken]
+
         public IActionResult Edit(string id)
         {
             var article = this.articleService.GetAll()
@@ -77,7 +77,6 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Edit(ArticleInputModel model, string id)
         {
             var author = this.userRepository

@@ -30,7 +30,6 @@
             this.oddService = oddService;
         }
 
-        [AutoValidateAntiforgeryToken]
         public IActionResult All()
         {
             var odds = this.oddService.GetAll();
@@ -38,7 +37,6 @@
             return this.View(odds);
         }
 
-        [AutoValidateAntiforgeryToken]
         public IActionResult Create()
         {
             var matches = this.matchService.GetAll()
@@ -53,7 +51,6 @@
             return this.View();
         }
 
-        [AutoValidateAntiforgeryToken]
         [HttpPost]
         public async Task<IActionResult> Create(OddInputModel oddInputModel)
         {

@@ -33,7 +33,6 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             this.repository = repository;
         }
 
-        [AutoValidateAntiforgeryToken]
         public IActionResult All()
         {
             var matches = this.matchService.GetAll();
@@ -42,7 +41,6 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             return View(matches);
         }
 
-        [AutoValidateAntiforgeryToken]
         public IActionResult Create()
         {
             var teamNames = this.teamService.GetAll()
@@ -55,7 +53,6 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(MatchInputModel model)
         {
             var league = this.leagueService.GetLeague(model.League);

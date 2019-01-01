@@ -65,6 +65,9 @@ namespace WinnersLeague.Web
                 .AddEntityFrameworkStores<WinnersLeagueContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddMvc(options =>
+            options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+
             services.AddTransient<IEmailSender, EmailSender>();
             
 
