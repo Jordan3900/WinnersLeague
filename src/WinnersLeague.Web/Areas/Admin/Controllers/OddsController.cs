@@ -76,11 +76,56 @@
                 Type = oddInputModel.Type
             };
 
-           await this.oddRepository.AddAsync(odd);
-           await this.oddRepository.SaveChangesAsync();
+            await this.oddRepository.AddAsync(odd);
+            await this.oddRepository.SaveChangesAsync();
 
 
-            return this.RedirectToAction("All","Odds");
+            return this.RedirectToAction("All", "Odds");
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var odd = this.oddRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
+
+            this.oddRepository.Delete(odd);
+            await this.oddRepository.SaveChangesAsync();
+
+            return this.RedirectToAction("All", "Odds");
+        }
+
+        public IActionResult Edit(string id)
+        {
+            var odd = this.oddService.GetAll()
+                .FirstOrDefault(x => x.Id == id);
+
+            var matches = this.matchService.GetAll()
+                .Select(x => new SelectMatchViewModel
+                {
+                    Id = x.Id,
+                    MatchName = $"{x.HomeTeam.Name} vs {x.AwayTeam.Name}"
+                }).ToList();
+
+            this.ViewData["Matches"] = matches;
+
+            return this.View(odd);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(OddInputModel model, string id)
+        {
+            var odd = this.oddRepository.All()
+                .FirstOrDefault(x => x.Id == id);
+
+            var match = this.matchService.GetMatch(model.MatchId);
+
+            mapper.Map(model, odd);
+            odd.Match = match;
+
+            await this.oddRepository.SaveChangesAsync();
+
+            return this.RedirectToAction("All", "Odds");
         }
     }
 }

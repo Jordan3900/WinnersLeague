@@ -1,21 +1,20 @@
 ﻿@model OddViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h2>Create</h2>
+<h2 class="text-center">Edit</h2>
 
-<h4>Odd</h4>
-<hr />
-<div class="row">
+<h4 class="text-center">Odd</h4>
+<hr class="hr-1" />
+<div class="row d-flex justify-content-center" >
     <div class="col-md-4">
-        <form asp-action="Create" method="post">
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
                 <select asp-for="Type" asp-items="Html.GetEnumSelectList<OddType>()" class="form-control">
-                    <option disabled="disabled" selected="selected">-- Choose Suggestion --</option>
                 </select>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
@@ -27,7 +26,6 @@
             <div class="form-group">
                 <label asp-for="Match" class="control-label"></label>
                 <select asp-for="Match" name="MatchId" class="form-control">
-                    <option disabled="disabled" selected="selected">-- Choose Match --</option>
                     @foreach (var match in ViewData["Matches"] as IList<SelectMatchViewModel>)
                     {
                         <option value="@match.Id">@match.MatchName</option>
@@ -36,7 +34,14 @@
                 <span asp-validation-for="Match" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-secondary" />
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsWinning" /> @Html.DisplayNameFor(model => model.IsWinning)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-secondary" />
                 <button class="btn btn-default" onclick="window.history.back()">Back</button>
             </div>
         </form>

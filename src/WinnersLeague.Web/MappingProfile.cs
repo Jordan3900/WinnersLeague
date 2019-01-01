@@ -7,6 +7,7 @@ using WinnersLeague.Models;
 using WinnersLeague.Services.Models;
 using WinnersLeague.Web.Areas.Admin.Models;
 using WinnersLeague.Web.Areas.Admin.Models.ArticleModels;
+using WinnersLeague.Web.Areas.Admin.Models.OddModels;
 
 namespace WinnersLeague.Web
 {
@@ -38,7 +39,10 @@ namespace WinnersLeague.Web
                    .ForMember(x => x.League,
                   m => m.MapFrom(c => c.League.Name))
                   .ReverseMap();
-            
+
+            CreateMap<Odd, OddInputModel>()
+                .ReverseMap()
+                .ForMember(x => x.Match, y => y.Ignore());
         }
     }
 }

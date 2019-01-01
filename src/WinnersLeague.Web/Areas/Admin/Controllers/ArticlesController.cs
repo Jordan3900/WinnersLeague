@@ -86,9 +86,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             var article = this.articleRepository.All()
                 .FirstOrDefault(x => x.Id == id);
 
-            article.Content = model.Content;
-            article.Title = model.Title;
-            article.Source = model.Source;
+            mapper.Map(article, model);
             article.Author = author;
 
             await this.articleRepository.SaveChangesAsync();
