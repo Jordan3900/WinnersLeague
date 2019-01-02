@@ -32,7 +32,9 @@
 
         public IActionResult All()
         {
-            var odds = this.oddService.GetAll();
+            var odds = this.oddService
+                .GetAll()
+                .OrderBy(x => x.Match);
 
             return this.View(odds);
         }

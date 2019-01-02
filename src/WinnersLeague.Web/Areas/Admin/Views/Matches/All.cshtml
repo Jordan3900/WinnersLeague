@@ -13,26 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                Match
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.League)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.OurBetSuggestion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MatchStart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HomeScore)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AwayScore)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
@@ -46,13 +36,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @item.AwayTeam.Name vs @item.HomeTeam.Name
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.League)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OurBetSuggestion)
@@ -61,19 +48,7 @@
                 @Html.DisplayFor(modelItem => item.MatchStart)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HomeTeam.Initials)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AwayTeam.Name)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

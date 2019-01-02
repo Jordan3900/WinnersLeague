@@ -24,12 +24,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.ShortContent)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Source)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Picture)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -49,15 +43,9 @@
                 @Html.DisplayFor(modelItem => item.ShortContent)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Source)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Picture)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id  })
             </td>
         </tr>
 }

@@ -21,7 +21,7 @@ namespace WinnersLeague.Web.Controllers
 
         public IActionResult Index()
         {
-            var matches = this.matchService.GetAll().Where(x => x.Id == "5b9b8596-62cb-42ee-acef-a3a44b8393f6");
+            var matches = this.matchService.GetAll().Where(x => x.Odds.Count() > 0);
 
             return View(matches);
         }

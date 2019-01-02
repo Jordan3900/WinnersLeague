@@ -93,5 +93,17 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
 
             return  this.RedirectToAction("All", "Articles");
         }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var odd = this.articleRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
+
+            this.articleRepository.Delete(odd);
+            await this.articleRepository.SaveChangesAsync();
+
+            return this.RedirectToAction("All", "Articles");
+        }
     }
 }

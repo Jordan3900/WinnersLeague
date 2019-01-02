@@ -22,11 +22,11 @@
                 {
                     <tr>
                         <td class="col-md-6">@match.HomeTeam.Name vs @match.AwayTeam.Name </td>
-                        <td class="col-md-1">@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.HomeWin).OddValue</td>
-                        <td class="col-md-1">2.5</td>
-                        <td class="col-md-1">2</td>
-                        <td class="col-md-1">U2.5</td>
-                        <td class="col-md-1">O2.5</td>
+                        <td class="col-md-1"><a>@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.HomeWin)?.OddValue</a></td>
+                        <td class="col-md-1">@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.AwayWin)?.OddValue</td>
+                        <td class="col-md-1">@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.X)?.OddValue</td>
+                        <td class="col-md-1">@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.U2_5)?.OddValue</td>
+                        <td class="col-md-1">@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.O2_5)?.OddValue</td>
                     </tr>
                 }
 
