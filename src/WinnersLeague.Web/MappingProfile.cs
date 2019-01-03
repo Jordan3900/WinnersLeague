@@ -28,6 +28,7 @@ namespace WinnersLeague.Web
                 .ForMember(x => x.AwayTeam, y => y.Ignore())
                 .ForMember(x => x.League, y => y.Ignore());
 
+
             CreateMap<League, LeagueViewModel>().ReverseMap();
 
             CreateMap<Article, ArticleInputModel>()

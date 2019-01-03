@@ -37,17 +37,7 @@
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
-            configuration.CreateMap<Team, MatchViewModel>()
-                .ForMember(x => x.HomeTeam,
-                    m => m.MapFrom(c => c.Name))
-                    .ForMember(x => x.HomeTeam,
-                    m => m.MapFrom(c => c.Logo)); ;
-
-            configuration.CreateMap<Team, MatchViewModel>()
-                .ForMember(x => x.AwayTeam,
-                    m => m.MapFrom(c => c.Name))
-                    .ForMember(x => x.AwayTeam,
-                    m => m.MapFrom(c => c.Logo));
+           
         }
     }
 }

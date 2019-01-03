@@ -20,7 +20,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
         private readonly ITeamService teamService;
         private readonly ILeagueService leagueService;
         private readonly IMapper mapper;
-        private readonly IRepository<Match> repository;
+        private readonly IRepository<Match> matchRepository;
 
         public MatchesController(IMatchService matchService,
             ILeagueService leagueService, IRepository<Match> repository,
@@ -30,14 +30,14 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             this.teamService = teamService;
             this.leagueService = leagueService;
             this.mapper = mapper;
-            this.repository = repository;
+            this.matchRepository = repository;
         }
 
         public IActionResult All()
         {
             var matches = this.matchService.GetAll();
-          
-           
+
+
             return View(matches);
         }
 
@@ -63,11 +63,47 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             match.HomeTeam = homeTeam;
             match.AwayTeam = awayTeam;
             match.League = league;
-           
-            await this.repository.AddAsync(match);
-            await this.repository.SaveChangesAsync();
+
+            await this.matchRepository.AddAsync(match);
+            await this.matchRepository.SaveChangesAsync();
 
             return this.RedirectToAction("Create", "Matches");
+        }
+
+        public IActionResult Edit(string id)
+        {
+            var match = this.matchService
+                .GetAll()
+                .FirstOrDefault(x => x.Id == id);
+
+            var teamNames = this.teamService.GetAll()
+               .Select(x => x.Name)
+               .ToList();
+
+            this.ViewData["Teams"] = teamNames;
+
+            return this.View(match);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MatchInputModel model)
+        {
+            var match = this.matchRepository.All()
+                .FirstOrDefault(x => x.Id == model.Id);
+
+            mapper.Map(model, match);
+
+            var league = this.leagueService.GetLeague(model.League);
+            var homeTeam = this.teamService.GetTeam(model.HomeTeam);
+            var awayTeam = this.teamService.GetTeam(model.AwayTeam);
+
+            match.HomeTeam = homeTeam;
+            match.AwayTeam = awayTeam;
+            match.League = league;
+
+            await this.matchRepository.SaveChangesAsync();
+
+            return this.RedirectToAction("All", "Matches");
         }
     }
 }

@@ -1,0 +1,91 @@
+﻿@model MatchViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2 class="text-center">Edit</h2>
+
+<h4 class="text-center">Match</h4>
+<hr class="hr-1" />
+<div class="row d-flex justify-content-center">
+    <div class="col-md-6 text-center">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="League" class="control-label"></label>
+                <input asp-for="League" class="form-control" />
+                <span asp-validation-for="League" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OurBetSuggestion" class="control-label"></label>
+                <select asp-for="OurBetSuggestion" asp-items="Html.GetEnumSelectList<OddType>()" class="form-control"></select>
+                <span asp-validation-for="OurBetSuggestion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MatchStart" class="control-label"></label>
+                <input asp-for="MatchStart" class="form-control" />
+                <span asp-validation-for="MatchStart" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label asp-for="HomeTeam" class="control-label"></label>
+                    <select asp-for="HomeTeam"  class="form-control">
+                        <option selected="selected">@Model.HomeTeam.Name</option>
+                        @foreach (var name in ViewData["Teams"] as IList<string>)
+                        {
+                            <option>@name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="HomeTeam" class="text-danger"></span>
+                </div>
+                <div class="align-self-end">
+                    <h1>vs</h1>
+                </div>
+                <div class="col">
+                    <label asp-for="AwayTeam" class="control-label"></label>
+                    <select asp-for="AwayTeam" class="form-control">
+                        <option selected="selected">@Model.AwayTeam.Name</option>
+                        @foreach (var name in ViewData["Teams"] as IList<string>)
+                        {
+                            <option>@name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="AwayTeam" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label asp-for="HomeScore" class="control-label"></label>
+                    <input asp-for="HomeScore" class="form-control" />
+                    <span asp-validation-for="HomeScore" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="AwayScore" class="control-label"></label>
+                    <input asp-for="AwayScore" class="form-control" />
+                    <span asp-validation-for="AwayScore" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" asp-items="Html.GetEnumSelectList<MatchStatus>()" class="form-control"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select asp-for="Type" asp-items="Html.GetEnumSelectList<MatchType>()" class="form-control"></select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea rows="6" asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-secondary" />
+                <button class="btn btn-default" onclick="window.history.back()">Back</button>
+            </div>
+        </form>
+    </div>
+</div>
+
