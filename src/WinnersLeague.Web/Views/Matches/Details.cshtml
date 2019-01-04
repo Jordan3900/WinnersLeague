@@ -60,7 +60,13 @@
                 </a>
             </div>
             <div class="media-body">
-                <h4 class="media-heading">@comment.Author</h4>
+                <h4 class="media-heading d-flex justify-content-between">
+                    @comment.Author
+                    @if (this.User.IsInRole("Admin") || comment.Author.UserName == this.User.Identity.Name)
+                    {
+                        <span><a class="text-dark" asp-controller="Comments" asp-action="Delete" asp-route-matchId="@Model.Id" asp-route-id="@comment.Id"><i class="fas fa-trash-alt"></i></a></span>
+                    }
+                </h4>
                 <p>@comment.Content</p>
 
             </div>

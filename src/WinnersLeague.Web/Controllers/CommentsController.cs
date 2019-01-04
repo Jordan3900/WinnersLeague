@@ -50,5 +50,22 @@
 
             return this.RedirectToAction("Details", "Matches", match);
         }
+
+        [Authorize(Roles ="Admin")]
+        public async Task<IActionResult> Delete(string id, string matchId)
+        {
+            var match = this.matchRepository
+                .All()
+                .FirstOrDefault(x => x.Id == matchId);
+
+            var comment = this.commentRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
+
+            this.commentRepository.Delete(comment);
+            await this.commentRepository.SaveChangesAsync();
+
+            return this.RedirectToAction("Details", "Matches", match);
+        }
     }
 }
