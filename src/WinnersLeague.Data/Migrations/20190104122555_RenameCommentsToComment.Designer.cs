@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WinnersLeague.Data;
 
 namespace WinnersLeague.Data.Migrations
 {
     [DbContext(typeof(WinnersLeagueContext))]
-    partial class WinnersLeagueContextModelSnapshot : ModelSnapshot
+    [Migration("20190104122555_RenameCommentsToComment")]
+    partial class RenameCommentsToComment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,7 +192,7 @@ namespace WinnersLeague.Data.Migrations
 
                     b.HasIndex("MatchId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comment");
                 });
 
             modelBuilder.Entity("WinnersLeague.Models.League", b =>

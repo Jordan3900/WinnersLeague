@@ -13,7 +13,7 @@
         public Match()
         {
             this.Odds = new HashSet<Odd>();
-            this.Comments = new HashSet<Comments>();
+            this.Comments = new HashSet<Comment>();
         }
 
         public string Id { get; set; }
@@ -39,6 +39,6 @@
         public MatchType Type { get; set; }
 
         virtual public ICollection<Odd> Odds { get; set; }
-        virtual public ICollection<Comments> Comments { get; set; }
+        virtual public ICollection<Comment> Comments { get; set; }
     }
 }

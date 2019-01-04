@@ -8,6 +8,7 @@ using WinnersLeague.Services.Models;
 using WinnersLeague.Web.Areas.Admin.Models;
 using WinnersLeague.Web.Areas.Admin.Models.ArticleModels;
 using WinnersLeague.Web.Areas.Admin.Models.OddModels;
+using WinnersLeague.Web.Models;
 
 namespace WinnersLeague.Web
 {
@@ -30,6 +31,10 @@ namespace WinnersLeague.Web
 
 
             CreateMap<League, LeagueViewModel>().ReverseMap();
+
+            CreateMap<Comment, CommentInputModel>().ReverseMap()
+                .ForMember(x => x.Author, y => y.Ignore())
+                .ForMember(x => x.Match, y => y.Ignore());
 
             CreateMap<Article, ArticleInputModel>()
                 .ReverseMap()

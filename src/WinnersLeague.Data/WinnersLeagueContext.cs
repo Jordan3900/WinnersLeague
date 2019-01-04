@@ -29,6 +29,8 @@
 
         public DbSet<Bet> Bets { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
         public DbSet<Article> Articles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

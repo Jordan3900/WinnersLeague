@@ -17,9 +17,9 @@
             </div>
             @if (Model.Status == MatchStatus.Finished)
             {
-            <div class="col align-self-center">
-                <h1>@Model.HomeScore - @Model.AwayScore</h1>
-            </div>
+                <div class="col align-self-center">
+                    <h1>@Model.HomeScore - @Model.AwayScore</h1>
+                </div>
 
             }
             else
@@ -49,5 +49,47 @@
         </div>
     </div>
 </div>
+<hr class="hr-1 mx-auto w-80" />
+@foreach (var comment in Model.Comments)
+{
+    <div class="col-lg-9 mx-auto">
+        <div class="media comment-box">
+            <div class="media-left">
+                <a href="#">
+                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">@comment.Author</h4>
+                <p>@comment.Content</p>
 
+            </div>
+        </div>
+    </div>
+}
+<hr class=" mx-auto w-80" />
+<div class="row mt-5 d-flex justify-content-center">
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <form class=" col-lg-9" method="post" asp-controller="Comments" asp-action="Create" asp-route-MatchId="@Model.Id">
 
+            <div class="form-group w-50 ">
+                <label for="Title">Title</label>
+                <input class="form-control" name="Title" placeholder="Title..." />
+            </div>
+
+            <div class="form-group w-75">
+                <label for="Author">Comment</label>
+                <textarea class="form-control" rows="6" name="Content" placeholder="Write your comment..."></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Comment</button>
+            </div>
+        </form>
+    }
+    else
+    {
+        <a asp-area="Identity" asp-page="/Account/Login">You have to Log In to write comments.</a>
+    }
+
+</div>

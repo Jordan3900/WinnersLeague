@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
 
 
-    public class Comments
+    public class Comment
     {
         public string Id { get; set; }
 
