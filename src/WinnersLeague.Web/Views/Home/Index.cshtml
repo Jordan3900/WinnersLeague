@@ -21,7 +21,7 @@
                 @foreach (var match in Model)
                 {
                     <tr>
-                        <td class="col-md-6">@match.HomeTeam.Name vs @match.AwayTeam.Name </td>
+                        <td class="col-md-6"><a class="text-dark" asp-controller="Matches" asp-action="Details" asp-route-id="@match.Id">@match.HomeTeam.Name vs @match.AwayTeam.Name</a></td>
                         <td class="col-md-1"><a>@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.HomeWin)?.OddValue</a></td>
                         <td class="col-md-1">@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.AwayWin)?.OddValue</td>
                         <td class="col-md-1">@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.X)?.OddValue</td>

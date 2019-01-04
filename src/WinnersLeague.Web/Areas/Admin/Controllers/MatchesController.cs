@@ -67,7 +67,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             await this.matchRepository.AddAsync(match);
             await this.matchRepository.SaveChangesAsync();
 
-            return this.RedirectToAction("Create", "Matches");
+            return this.RedirectToAction("Create", "All");
         }
 
         public IActionResult Edit(string id)
@@ -101,6 +101,18 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             match.AwayTeam = awayTeam;
             match.League = league;
 
+            await this.matchRepository.SaveChangesAsync();
+
+            return this.RedirectToAction("All", "Matches");
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var match = this.matchRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
+
+            this.matchRepository.Delete(match);
             await this.matchRepository.SaveChangesAsync();
 
             return this.RedirectToAction("All", "Matches");

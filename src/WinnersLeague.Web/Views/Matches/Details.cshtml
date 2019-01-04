@@ -1,0 +1,53 @@
+﻿@model MatchViewModel
+
+@{
+    ViewData["Title"] = "Match Details";
+}
+
+<h2 class="text-center">Match Details</h2>
+<div class="row  d-flex justify-content-center">
+    <div class="card text-center col-lg-9">
+        <div class="card-header">
+            @Model.MatchStart
+        </div>
+        <div class="card-body  d-flex justify-content-around">
+            <div class="col-lg-4">
+                <h4>@Model.HomeTeam.Name</h4>
+                <img src="@Url.Content(Model.HomeTeam.Logo)" alt="Home-Team-Picture" width='94' height='94' />
+            </div>
+            @if (Model.Status == MatchStatus.Finished)
+            {
+            <div class="col align-self-center">
+                <h1>@Model.HomeScore - @Model.AwayScore</h1>
+            </div>
+
+            }
+            else
+            {
+                <div class="col align-self-center">
+                    <img src="~/Images/img_418591.png" class="img-responsive" alt="VS" width='100' height='100' />
+                </div>
+            }
+            <div class="col-lg-4">
+                <h4>@Model.AwayTeam.Name</h4>
+                <img src="@Url.Content(Model.AwayTeam.Logo)" alt="Away-Team-Picture" width='94' height='94' />
+            </div>
+        </div>
+        <div>
+            <h5 class="text-center">Our Suggestion:</h5>
+            <h5 class="text-center">@Html.DisplayFor(model => model.OurBetSuggestion)</h5>
+        </div>
+        <div class="d-flex justify-content-center">
+            <hr class="hr-1 w-50 d-flex justify-content-center" />
+        </div>
+
+        <div class="card-body  d-flex justify-content-center">
+            <div>
+                <h2>Description:</h2>
+                <h5 class="text-center">@Model.Description</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+
