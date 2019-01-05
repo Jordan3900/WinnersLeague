@@ -3,6 +3,7 @@
     using AutoMapper;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Text;
     using WinnersLeague.Models;
@@ -12,12 +13,18 @@
     {
         public string Id { get; set; }
 
+        [Required]
         public string Author { get; set; }
 
+        [Required]
+        [StringLength(150, MinimumLength = 5)]
         public string Title { get; set; }
 
+        [Required]
+        [MinLength(10)]
         public string Content { get; set; }
 
+        [Required]
         public string Picture { get; set; }
 
         public string Source { get; set; }

@@ -9,8 +9,8 @@
     {
         IEnumerable<StadiumViewModel> GetAll();
 
-        bool IsTeamIdValid(string stadiumId);
+        bool IsStadiumIdValid(string stadiumId);
 
-        string GetTeamId(string name);
+        string GetStadiumId(string name);
     }
 }

@@ -47,6 +47,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ArticleInputModel model)
         {
+
             var author = this.userRepository
                 .All()
                 .FirstOrDefault(x => x.UserName == model.Author);

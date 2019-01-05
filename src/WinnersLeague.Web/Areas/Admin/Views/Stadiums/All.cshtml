@@ -4,7 +4,7 @@
     ViewData["Title"] = "All";
 }
 
-<h2>All</h2>
+<h2>All Staduims</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -12,9 +12,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -30,18 +27,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Picture)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -57,13 +48,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Picture)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                <a asp-area="" asp-controller="Stadiums" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id  })
             </td>
         </tr>
 }

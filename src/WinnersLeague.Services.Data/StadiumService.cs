@@ -29,15 +29,15 @@ namespace WinnersLeague.Services.Data
 
         }
 
-        public string GetTeamId(string name)
+        public string GetStadiumId(string name)
         {
-            var team = this.stadiumRepository.All()
+            var stadium = this.stadiumRepository.All()
                 .FirstOrDefault(x => x.Name == name);
 
-            return team.Id;
+            return stadium.Id;
         }
 
-        public bool IsTeamIdValid(string stadiumId)
+        public bool IsStadiumIdValid(string stadiumId)
         {
             return this.stadiumRepository.All().Any(x => x.Id == stadiumId);
         }

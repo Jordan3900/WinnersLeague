@@ -17,6 +17,7 @@ namespace WinnersLeague.Web
         public MappingProfile()
         {
             CreateMap<League, LeagueViewModel>().ReverseMap();
+
             CreateMap<Team, TeamViewModel>()
                 .ReverseMap()
                 .ForMember(x => x.Stadium, y => y.Ignore());
@@ -45,6 +46,12 @@ namespace WinnersLeague.Web
                    .ForMember(x => x.League,
                   m => m.MapFrom(c => c.League.Name))
                   .ReverseMap();
+
+            CreateMap<Stadium, StadiumViewModel>()
+                 .ReverseMap()
+                 .ForMember(x => x.Team, y => y.Ignore());
+
+
 
             CreateMap<Odd, OddInputModel>()
                 .ReverseMap()
