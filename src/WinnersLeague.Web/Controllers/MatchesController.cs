@@ -16,6 +16,19 @@
             this.matchService = matchService;
         }
 
+        [Route("/Matches/All",Name ="AllMatches")]
+        public IActionResult All()
+        {
+            var match = this.matchService
+                .GetAll()
+                .OrderByDescending(x => x.MatchStart)
+                .ToList();
+                
+
+
+            return View(match);
+        }
+
         public IActionResult Details(string id)
         {
             var match = this.matchService

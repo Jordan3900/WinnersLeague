@@ -5,7 +5,11 @@
 
 <div class="d-flex justify-content-between">
     <h1>@ViewData["Title"]</h1>
-    <h5>Total Points: @Model.MyBet.User.Points</h5>
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <h5>Total Points: @Model.MyBet.User.Points</h5>
+    }
+
 </div>
 
 <div class="row">

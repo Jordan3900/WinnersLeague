@@ -85,6 +85,12 @@
             {
                 bet.IsPaid = true;
             }
+            var winStats = (user
+                .Bets
+                .Where(x => x.IsWinning && !x.IsCurrentBet).Count() / 
+                user.Bets.Where(x => !x.IsCurrentBet).Count() * 100);
+
+            user.WinStats = winStats;
 
             await this.userRepository.SaveChangesAsync();
         }
