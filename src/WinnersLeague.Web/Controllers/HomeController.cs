@@ -7,26 +7,38 @@ using Microsoft.AspNetCore.Mvc;
 using WinnersLeague.Data;
 using WinnersLeague.Services.Data.Contracts;
 using WinnersLeague.Web.Models;
+using WinnersLeague.Web.Models.HomePageModel;
 
 namespace WinnersLeague.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMatchService matchService;
+        private readonly IHomeService homeService;
+        private readonly IBetService betService;
 
-        public HomeController(IMatchService matchService)
+        public HomeController(IHomeService homeService, IBetService betService)
         {
-            this.matchService = matchService;
+            this.homeService = homeService;
+            this.betService = betService;
         }
 
         public IActionResult Index()
         {
-            var matches = this.matchService.GetAll().Where(x => x.Odds.Count() > 0);
+            var isAuthenticated = this.User.Identity.IsAuthenticated;
 
-            return View(matches);
+            var homeModel = new HomePageViewModel
+            {
+                Matches = this.homeService.Matches()
+            };
+
+            if (isAuthenticated)
+            {
+                var username = this.User.Identity.Name;
+                homeModel.MyBet = this.betService.GetCurrentBet(username);
+            }
+           
+            return View(homeModel);
         }
-
-        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MatchViewModel>
+﻿@model HomePageViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -6,7 +6,7 @@
 <h1>@ViewData["Title"]</h1>
 <div class="row">
     <div class="col-lg-8">
-        <table class="table table-striped table-hover">
+        <table id="main-grid" class="table table-striped table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th class="col-md-6">Matches</th>
@@ -18,15 +18,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var match in Model)
+                @foreach (var match in Model.Matches)
                 {
-                    <tr>
+                    <tr row_id="@match.Id">
                         <td class="col-md-6"><a class="text-dark" asp-controller="Matches" asp-action="Details" asp-route-id="@match.Id">@match.HomeTeam.Name vs @match.AwayTeam.Name</a></td>
-                        <td class="col-md-1"><a>@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.HomeWin)?.OddValue</a></td>
-                        <td class="col-md-1">@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.AwayWin)?.OddValue</td>
-                        <td class="col-md-1">@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.X)?.OddValue</td>
-                        <td class="col-md-1">@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.U2_5)?.OddValue</td>
-                        <td class="col-md-1">@match.Odds.FirstOrDefault(x => x.Type == WinnersLeague.Models.Enums.OddType.O2_5)?.OddValue</td>
+                        <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddId="@match.Odds.FirstOrDefault(x => x.Type == OddType.HomeWin)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.HomeWin)?.OddValue</a></td>
+                        <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddId="@match.Odds.FirstOrDefault(x => x.Type == OddType.X)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.X)?.OddValue</a></td>
+                        <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddId="@match.Odds.FirstOrDefault(x => x.Type == OddType.AwayWin)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.AwayWin)?.OddValue</a></td>
+                        <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddId="@match.Odds.FirstOrDefault(x => x.Type == OddType.U2_5)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.U2_5)?.OddValue</a></td>
+                        <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddID="@match.Odds.FirstOrDefault(x => x.Type == OddType.O2_5)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.O2_5)?.OddValue</a></td>
                     </tr>
                 }
 
@@ -36,12 +36,121 @@
     <div class="col-lg-4">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <h5 class="card-title">My Bet</h5>
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    @foreach (var odd in Model.MyBet.Odds)
+                    {
+                        <p>@odd.Match.HomeTeam.Initials vs @odd.Match.AwayTeam.Initials</p>
+                        <p>Bet: @Html.DisplayFor(OddType => odd.Type)</p>
+                        <div class="d-flex justify-content-between">
+                            <p>Odd value: @odd.OddValue</p>
+                            <a asp-controller="Bets" asp-action="RemoveOdd" asp-route-oddId="@odd.Id" class="btn btn-secondary btn-sm text-white">Remove</a>
+                        </div>
+                        <hr />
+                    }
+                    if (Model.MyBet.Odds.Count > 0)
+                    {
+                        <form asp-controller="Bets" asp-action="Create" asp-route-Id="@Model.MyBet.Id" method="post">
+                            <div class="form-group w-50">
+                                <input name="BetAmount" max="@Model.MyBet.User.Points" asp-for="MyBet.BetAmount" type="number" step="0.01" class="form-control" />
+                                <span asp-validation-for="MyBet.BetAmount" class="text-danger"></span>
+                            </div>
+                            <div class="d-flex justify-content-around form-group">
+                                <div>
+                                    <button type="submit" class="btn btn-primary">Bet</button>
+                                </div>
+                                <div>
+                                    <a asp-controller="Bets" asp-action="RemoveAllOdds" class="btn btn-secondary">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                    }
+
+                }
             </div>
         </div>
     </div>
 </div>
+
+@*@section Scripts {
+        <script>
+
+            var predicitonList = new Array();
+            function submitForm() {
+                if (predicitonList.length < 1) {
+                    alert('Please select odd')
+                } else {
+                    $.ajax({
+                        url: '/Home/SaveForm',
+                        type: 'POST',
+                        data: JSON.stringify({ predicitonList }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        processData: true,
+                        cache: false,
+                        success: function (result) { alert(result); },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                }
+            }
+
+            function addToForm(obj) {
+                var cardText = $('div.card-body > p.card-text');
+
+                if (predicitonList.length == 0) {
+                    cardText.html('');
+                }
+                predicitonList.push(obj);
+
+                var html = "<div>" + obj.matchName + "&nbsp;" + obj.oddType + "&nbsp;" + obj.odd + "&nbsp;"
+                    + "<button onclick = \"removeFromForm(this, '" + obj.match_id + "','" + obj.oddType + "')\">X</button></div><br/>";
+
+                cardText.append(html);
+            }
+
+            function changeBackGround(cell) {
+                $(cell).attr('style', 'background:red')
+            }
+
+            function removeBackGround(match_id, oddType) {
+                var rows = $('#main-grid > tbody > tr')
+                for (var i = 0; i < rows.length; i++) {
+                    if ($(rows[i]).attr("row_id") == match_id) {
+                        for (var c = 0; c < rows[i].cells.length; c++) {
+                            if ($(rows[i].cells[c]).attr('cell_type') == oddType) {
+                                $(rows[i].cells[c]).removeAttr('style')
+                            }
+                        }
+                    }
+                }
+            }
+
+            function removeFromForm(self, match_id, oddType) {
+                for (var i = 0; i < predicitonList.length; i++) {
+                    if (predicitonList[i].match_id == match_id && predicitonList[i].oddType == oddType) {
+                        predicitonList.pop(predicitonList[i])
+                        $(self).parent().remove()
+                        removeBackGround(match_id, oddType)
+                    }
+                }
+            }
+
+            $(document).ready(function () {
+                $('#main-grid > tbody > tr > td').click(function (event) {
+                    var $self = $(this)
+                    var match_id = $($self.parent()[0]).attr('row_id');
+                    var match = $($self.parent()[0].cells[0]).text();
+                    var odd = $self.text();
+                    var oddType = $self.attr('cell_type');
+
+                    addToForm({ 'matchName': match, 'match_id': match_id, 'odd': odd, 'oddType': oddType })
+                    changeBackGround(this);
+
+                    console.log({ 'matchName': match, 'match_id': match_id, 'odd': odd, 'oddType': oddType });
+                })
+            })
+        </script>
+    }*@

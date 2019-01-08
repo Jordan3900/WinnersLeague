@@ -22,6 +22,7 @@ using WinnersLeague.Services.Data;
 using AutoMapper;
 using WinnersLeague.Services.Mapping;
 using WinnersLeague.Services.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WinnersLeague.Web
 {
@@ -88,7 +89,9 @@ namespace WinnersLeague.Web
             services.AddScoped<ILeagueService, LeagueService>();
             services.AddScoped<IArticleService, ArticleService>();
             services.AddScoped<IMatchService, MatchService>();
+            services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IOddService, OddService>();
+            services.AddScoped<IBetService, BetService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WinnersLeague.Data;
 
 namespace WinnersLeague.Data.Migrations
 {
     [DbContext(typeof(WinnersLeagueContext))]
-    partial class WinnersLeagueContextModelSnapshot : ModelSnapshot
+    [Migration("20190108095135_AddIsCurrentBetToBetModel")]
+    partial class AddIsCurrentBetToBetModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,11 +166,11 @@ namespace WinnersLeague.Data.Migrations
 
                     b.Property<bool>("IsWinning");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("WinnersLeagueUserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("WinnersLeagueUserId");
 
                     b.ToTable("Bets");
                 });
@@ -442,9 +444,9 @@ namespace WinnersLeague.Data.Migrations
 
             modelBuilder.Entity("WinnersLeague.Models.Bet", b =>
                 {
-                    b.HasOne("WinnersLeague.Models.WinnersLeagueUser", "User")
+                    b.HasOne("WinnersLeague.Models.WinnersLeagueUser")
                         .WithMany("Bets")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("WinnersLeagueUserId");
                 });
 
             modelBuilder.Entity("WinnersLeague.Models.Comment", b =>

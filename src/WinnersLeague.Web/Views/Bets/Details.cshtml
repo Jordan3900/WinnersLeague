@@ -1,0 +1,42 @@
+﻿@model WinnersLeague.Models.Bet
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Bet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IsWinning)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsWinning)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BetAmount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BetAmount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCurrentBet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsCurrentBet)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountOfWin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AmountOfWin)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
