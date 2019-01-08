@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using WinnersLeague.Data;
-using WinnersLeague.Services.Data.Contracts;
-using WinnersLeague.Web.Models;
-using WinnersLeague.Web.Models.HomePageModel;
-
-namespace WinnersLeague.Web.Controllers
+﻿namespace WinnersLeague.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using WinnersLeague.Data;
+    using WinnersLeague.Services.Data.Contracts;
+    using WinnersLeague.Web.Models;
+    using WinnersLeague.Web.Models.HomePageModel;
+    using WinnersLeague.Models.Enums;
+
     public class HomeController : Controller
     {
         private readonly IHomeService homeService;
@@ -29,6 +30,7 @@ namespace WinnersLeague.Web.Controllers
             var homeModel = new HomePageViewModel
             {
                 Matches = this.homeService.Matches()
+                .Where(x => x.Status != MatchStatus.Finished).ToList()
             };
 
             if (isAuthenticated)

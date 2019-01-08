@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Bet>
+
+@{
+    ViewData["Title"] = "All Bets";
+}
+<h2>My Bets</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IsWinning)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BetAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountOfWin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsWinning)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BetAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountOfWin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

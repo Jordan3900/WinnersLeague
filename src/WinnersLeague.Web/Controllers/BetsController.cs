@@ -12,6 +12,7 @@ using WinnersLeague.Web.Models.HomePageModel;
 
 namespace WinnersLeague.Web.Controllers
 {
+    [Authorize]
     public class BetsController : Controller
     {
         private readonly IOddService oddService;
@@ -33,7 +34,7 @@ namespace WinnersLeague.Web.Controllers
             this.betRepository = betRepository;
         }
 
-       
+
         public async Task<IActionResult> AddOdd(string oddId, string matchId)
         {
             bool isAuthenticated = User.Identity.IsAuthenticated;
@@ -58,7 +59,6 @@ namespace WinnersLeague.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Create(BetInputModel model)
         {
             var currentBet = this.betRepository
@@ -68,8 +68,10 @@ namespace WinnersLeague.Web.Controllers
             currentBet.IsCurrentBet = false;
             currentBet.BetAmount = model.BetAmount;
             currentBet.AmountOfWin = currentBet.Odds.Sum(x => x.OddValue) * currentBet.BetAmount;
+            currentBet.Date = DateTime.UtcNow;
             currentBet.User.Points -= model.BetAmount;
 
+            await this.betService.AddingAmountOfWin(currentBet.User.UserName);
             await this.betRepository.SaveChangesAsync();
             var nextCurrentBet = this.betService.GetCurrentBet(currentBet.User.UserName);
 
@@ -120,11 +122,27 @@ namespace WinnersLeague.Web.Controllers
             return this.RedirectToAction("Index", "Home", homeModel);
         }
 
-            public IActionResult Details()
+        public IActionResult Details()
         {
 
 
             return this.View();
         }
+
+        public async Task<IActionResult> All()
+        {
+
+            var username = this.User.Identity.Name;
+            var bets = this.betRepository
+                .All()
+                .Where(x => x.User.UserName == username && !x.IsCurrentBet)
+                .OrderByDescending(x => x.Date)
+                .ToList();
+
+            await this.betService.AddingAmountOfWin(username);
+
+            return this.View(bets);
+        }
+
     }
 }

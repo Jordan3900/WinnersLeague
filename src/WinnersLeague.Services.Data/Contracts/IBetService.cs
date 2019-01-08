@@ -9,7 +9,7 @@
     public interface IBetService
     {
         ICollection<Bet> GetAll();
-
+        Task AddingAmountOfWin(string username);
         Bet GetCurrentBet(string username);
     }
 }

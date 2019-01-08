@@ -14,6 +14,7 @@
         private readonly IRepository<Bet> betRepository;
         private readonly IRepository<WinnersLeagueUser> userRepository;
 
+
         public BetService(IRepository<Bet> betRepository, IRepository<WinnersLeagueUser> userRepository)
         {
             this.betRepository = betRepository;
@@ -27,7 +28,7 @@
             return bets;
         }
 
-        public Bet GetCurrentBet(string username)
+        public  Bet GetCurrentBet(string username)
         {
             var currentbet = betRepository
                 .All()
@@ -36,8 +37,7 @@
             if (currentbet == null)
             {
                currentbet = CreateCurrentBet(username).Result;
-
-               
+                
             }
 
             return currentbet;
@@ -59,6 +59,34 @@
            await this.betRepository.SaveChangesAsync();
 
             return currentbet;
+        }
+
+        public  async Task AddingAmountOfWin(string username)
+        {
+            var user = this.userRepository
+                .All()
+                .FirstOrDefault(x => x.UserName == username);
+
+            var bets = this.betRepository.All()
+                .Where(x => !x.IsPaid && !x.IsCurrentBet && x.Odds.Count > 0)
+                .ToList();
+               
+            foreach (var bet in bets)
+            {
+                bet.IsWinning = bet.Odds.All(x => x.IsWinning);
+            }
+
+            var amountOfWin = bets
+                .Sum(x => x.AmountOfWin);
+
+            user.Points += amountOfWin;
+
+            foreach (var bet in bets)
+            {
+                bet.IsPaid = true;
+            }
+
+            await this.userRepository.SaveChangesAsync();
         }
     }
 }
