@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using WinnersLeague.Common;
-using WinnersLeague.Models;
-using WinnersLeague.Services.Data.Contracts;
-using WinnersLeague.Web.Models.BetModels;
-using WinnersLeague.Web.Models.HomePageModel;
+﻿
 
 namespace WinnersLeague.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using WinnersLeague.Common;
+    using WinnersLeague.Models;
+    using WinnersLeague.Services.Data.Contracts;
+    using WinnersLeague.Web.Models.BetModels;
+    using WinnersLeague.Web.Models.HomePageModel;
+
     [Authorize]
     public class BetsController : Controller
     {
@@ -149,7 +151,7 @@ namespace WinnersLeague.Web.Controllers
             var username = this.User.Identity.Name;
             var bet = this.betService.GetAll().FirstOrDefault(x => x.Id == betId);
 
-            await this.betService.AddingAmountOfWin(username, betId);
+            await this.betService.AddingAmountOfWinAsync(username, betId);
 
             return this.RedirectToAction("Details", "Bets", bet);
         }
@@ -163,7 +165,7 @@ namespace WinnersLeague.Web.Controllers
                 .OrderByDescending(x => x.Date)
                 .ToList();
 
-            await this.betService.CheckingIsWiningBets();
+            await this.betService.CheckingIsWiningBetsAsync();
 
             return this.View(bets);
         }

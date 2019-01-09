@@ -63,7 +63,7 @@
             return currentbet;
         }
 
-        public async Task AddingAmountOfWin(string username, string betId)
+        public async Task AddingAmountOfWinAsync(string username, string betId)
         {
             var bet = betRepository
                 .All()
@@ -81,7 +81,7 @@
             await this.userRepository.SaveChangesAsync();
         }
 
-        public async Task CalculatingWinRates()
+        public async Task CalculatingWinRatesAsync()
         {
             var users = this.userRepository
                 .All()
@@ -103,7 +103,7 @@
             await this.userRepository.SaveChangesAsync();
         }
 
-        public async Task CheckingIsWiningBets()
+        public async Task CheckingIsWiningBetsAsync()
         {
             var bets = this.betRepository.All()
                 .Where(x => !x.IsPaid && !x.IsCurrentBet && x.Odds.Count > 0)

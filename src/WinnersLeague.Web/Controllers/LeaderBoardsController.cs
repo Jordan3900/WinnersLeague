@@ -9,16 +9,23 @@
     using WinnersLeague.Models;
     using WinnersLeague.Web.Models.UserModels;
     using WinnersLeague.Services.Mapping;
+    using WinnersLeague.Services.Data.Contracts;
 
     public class LeaderboardsController : Controller
     {
         private readonly IRepository<WinnersLeagueUser> userRepository;
         private readonly IRepository<League> leagueRepository;
+        private readonly IBetService betService;
+        private readonly IMatchService matchService;
 
-        public LeaderboardsController(IRepository<WinnersLeagueUser> userRepository, IRepository<League> leagueRepository)
+        public LeaderboardsController(IRepository<WinnersLeagueUser> userRepository,
+            IRepository<League> leagueRepository,  IBetService betService
+            , IMatchService matchService)
         {
+            this.matchService = matchService;
             this.userRepository = userRepository;
             this.leagueRepository = leagueRepository;
+            this.betService = betService;
         }
 
         public IActionResult UsersList()
@@ -28,16 +35,20 @@
                 .OrderByDescending(x => x.WinStats)
                 .ThenByDescending(x => x.Points)
                 .ToList();
-               
+
+            this.betService.CheckingIsWiningBetsAsync();
+            
 
             return this.View(users);
         }
 
-        public IActionResult LeagueList(string name)
+        public async Task<IActionResult> LeagueList(string name)
         {
             var league = this.leagueRepository
                 .All()
                 .FirstOrDefault(x => x.Name == name);
+
+            await this.matchService.CheckingLeagueMatchesAsync();
 
             return this.View(league);
         }

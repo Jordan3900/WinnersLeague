@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using System.Threading.Tasks;
     using WinnersLeague.Models.Enums;
@@ -25,6 +26,8 @@
         virtual public League League { get; set; }
 
         public string Description { get; set; }
+
+        public bool IsMatchChecked { get; set; }
 
         public OddType OurBetSuggestion { get; set; }
 

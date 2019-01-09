@@ -10,9 +10,11 @@
     {
         ICollection<Bet> GetAll();
 
-        Task AddingAmountOfWin(string username, string betId);
+        Task AddingAmountOfWinAsync(string username, string betId);
 
-        Task CheckingIsWiningBets();
+        Task CheckingIsWiningBetsAsync();
+
+        Task CalculatingWinRatesAsync();
 
         Bet GetCurrentBet(string username);
     }
