@@ -9,7 +9,10 @@
     {
         <h5>Total Points: @Model.MyBet.User.Points</h5>
     }
-
+    else
+    {
+            <h5>Please <a asp-area="Identity" asp-page="/Account/Login">Login</a> to bet.</h5>
+    }
 </div>
 
 <div class="row">
@@ -28,16 +31,29 @@
             <tbody>
                 @foreach (var match in Model.Matches)
                 {
-                    <tr row_id="@match.Id">
-                        <td class="col-md-6"><a class="text-dark" asp-controller="Matches" asp-action="Details" asp-route-id="@match.Id">@match.HomeTeam.Name vs @match.AwayTeam.Name</a></td>
-                        <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddId="@match.Odds.FirstOrDefault(x => x.Type == OddType.HomeWin)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.HomeWin)?.OddValue</a></td>
-                        <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddId="@match.Odds.FirstOrDefault(x => x.Type == OddType.X)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.X)?.OddValue</a></td>
-                        <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddId="@match.Odds.FirstOrDefault(x => x.Type == OddType.AwayWin)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.AwayWin)?.OddValue</a></td>
-                        <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddId="@match.Odds.FirstOrDefault(x => x.Type == OddType.U2_5)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.U2_5)?.OddValue</a></td>
-                        <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddID="@match.Odds.FirstOrDefault(x => x.Type == OddType.O2_5)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.O2_5)?.OddValue</a></td>
-                    </tr>
+                    if (this.User.Identity.IsAuthenticated)
+                    {
+                        <tr row_id="@match.Id">
+                            <td class="col-md-6"><a class="text-dark" asp-controller="Matches" asp-action="Details" asp-route-id="@match.Id">@match.HomeTeam.Name vs @match.AwayTeam.Name</a></td>
+                            <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddId="@match.Odds.FirstOrDefault(x => x.Type == OddType.HomeWin)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.HomeWin)?.OddValue</a></td>
+                            <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddId="@match.Odds.FirstOrDefault(x => x.Type == OddType.X)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.X)?.OddValue</a></td>
+                            <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddId="@match.Odds.FirstOrDefault(x => x.Type == OddType.AwayWin)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.AwayWin)?.OddValue</a></td>
+                            <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddId="@match.Odds.FirstOrDefault(x => x.Type == OddType.U2_5)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.U2_5)?.OddValue</a></td>
+                            <td class="col-md-1"><a asp-controller="Bets" asp-action="AddOdd" asp-route-matchID="@match.Id" asp-route-oddID="@match.Odds.FirstOrDefault(x => x.Type == OddType.O2_5)?.Id">@match.Odds.FirstOrDefault(x => x.Type == OddType.O2_5)?.OddValue</a></td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr row_id="@match.Id">
+                            <td class="col-md-6"><a class="text-dark" asp-controller="Matches" asp-action="Details" asp-route-id="@match.Id">@match.HomeTeam.Name vs @match.AwayTeam.Name</a></td>
+                            <td class="col-md-1"><a asp-area="Identity" asp-page="/Account/Login">@match.Odds.FirstOrDefault(x => x.Type == OddType.HomeWin)?.OddValue</a></td>
+                            <td class="col-md-1"><a asp-area="Identity" asp-page="/Account/Login">@match.Odds.FirstOrDefault(x => x.Type == OddType.X)?.OddValue</a></td>
+                            <td class="col-md-1"><a asp-area="Identity" asp-page="/Account/Login">@match.Odds.FirstOrDefault(x => x.Type == OddType.AwayWin)?.OddValue</a></td>
+                            <td class="col-md-1"><a asp-area="Identity" asp-page="/Account/Login">@match.Odds.FirstOrDefault(x => x.Type == OddType.U2_5)?.OddValue</a></td>
+                            <td class="col-md-1"><a asp-area="Identity" asp-page="/Account/Login">@match.Odds.FirstOrDefault(x => x.Type == OddType.O2_5)?.OddValue</a></td>
+                        </tr>
+                    }
                 }
-
             </tbody>
         </table>
     </div>
