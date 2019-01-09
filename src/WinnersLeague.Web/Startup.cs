@@ -1,31 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using WinnersLeague.Data;
-using WinnersLeague.Models;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using WinnersLeague.Services;
-using WinnersLeague.Web.Middlewares.MiddlewareExtansions;
-using WinnersLeague.Common;
-using WinnersLeague.Services.Data.Contracts;
-using WinnersLeague.Services.Data;
-using AutoMapper;
-using WinnersLeague.Services.Mapping;
-using WinnersLeague.Services.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
-
-namespace WinnersLeague.Web
+﻿namespace WinnersLeague.Web
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.HttpsPolicy;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using WinnersLeague.Data;
+    using WinnersLeague.Models;
+    using Microsoft.AspNetCore.Identity.UI.Services;
+    using WinnersLeague.Services;
+    using WinnersLeague.Web.Middlewares.MiddlewareExtansions;
+    using WinnersLeague.Common;
+    using WinnersLeague.Services.Data.Contracts;
+    using WinnersLeague.Services.Data;
+    using AutoMapper;
+    using WinnersLeague.Services.Mapping;
+    using WinnersLeague.Services.Models;
+    using Microsoft.AspNetCore.Authentication.Cookies;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)

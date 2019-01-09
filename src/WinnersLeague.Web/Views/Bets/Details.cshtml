@@ -1,42 +1,100 @@
-﻿@model WinnersLeague.Models.Bet
+﻿@model Bet
 
 @{
     ViewData["Title"] = "Details";
+    var counter = 0;
 }
 
-<h2>Details</h2>
+<div class="row d-flex justify-content-center">
+    <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+        <div class="row ">
+            <div class="col d-flex justify-content-center">
+                <p>
+                    <em>Date: @Model.Date</em>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mx-auto">
+                <h1>Bet Details</h1>
+            </div>
 
-<div>
-    <h4>Bet</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.IsWinning)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsWinning)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BetAmount)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.BetAmount)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsCurrentBet)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsCurrentBet)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AmountOfWin)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AmountOfWin)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="font-weight-bold">Odds</th>
+                        <th class="font-weight-bold">#</th>
+                        <th class="text-center font-weight-bold">Bet Type</th>
+                        <th class="text-center font-weight-bold">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var odd in Model.Odds)
+                    {
+                        counter++;
+                        if (odd.IsWinning)
+                        {
+                            <tr class="bg-success">
+                                <td class="col-md-9"><h4>@odd.Match.HomeTeam.Name vs @odd.Match.AwayTeam.Name</h4></td>
+                                <td class="col-md-1" style="text-align: center"> @counter </td>
+                                <td class="col-md-1 text-center"> @Html.DisplayFor(OddType => odd.Type)</td>
+                                <td class="col-md-1 text-center">@odd.OddValue</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr class="bg-danger">
+                                <td class="col-md-9"><h4>@odd.Match.HomeTeam.Name vs @odd.Match.AwayTeam.Name</h4></td>
+                                <td class="col-md-1" style="text-align: center"> @counter </td>
+                                <td class="col-md-1 text-center"> @Html.DisplayFor(OddType => odd.Type)</td>
+                                <td class="col-md-1 text-center">@odd.OddValue</td>
+                            </tr>
+                        }
+                    }
+                    <tr class="d-flex justify-content-between">
+                        <td class="col-md-4"></td>
+                        <td></td>
+                        <td class="col-md-12 ">
+                            <p class="">
+                                <strong>Bet Amount:</strong>
+                            </p>
+                            <p>
+                                <strong>Amount Of Win: </strong>
+                            </p>
+                        </td>
+                        <td class="col">
+                            <p>
+                                <strong>$@Model.BetAmount</strong>
+                            </p>
+                            <p>
+                                <strong>$@Model.AmountOfWin</strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td class="text-right"><h4><strong>Total: </strong></h4></td>
+                        <td class="text-center text-danger"><h4><strong>$@Model.AmountOfWin</strong></h4></td>
+                    </tr>
+                </tbody>
+            </table>
+            @if (Model.IsWinning && !Model.IsPaid)
+            {
+                <form class="col bg-success" asp-controller="Bets" asp-action="TakeAmountOfWin" asp-route-betId="@Model.Id" method="post">
+                    <button type="submit" class="btn btn-success btn-lg btn-block">
+                        Take Now   <span class="glyphicon glyphicon-chevron-right"></span>
+                    </button>
+                </form>
+            }
+            else
+            {
+                <button type="button" disabled="disabled" class="btn btn-success btn-lg btn-block">
+                    Take Now   <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            }
+            <button class="btn btn-secondary btn-lg btn-block" onclick="window.history.back()">Back</button>
+
+        </div>
+    </div>
 </div>

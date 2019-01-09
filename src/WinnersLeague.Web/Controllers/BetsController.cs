@@ -35,9 +35,10 @@ namespace WinnersLeague.Web.Controllers
         }
 
 
-        public async Task<IActionResult> AddOdd(string oddId, string matchId)
+        public async Task<IActionResult> AddOdd(string oddId)
         {
             bool isAuthenticated = User.Identity.IsAuthenticated;
+            bool isFromTheSameMatch = false;
             if (!isAuthenticated)
             {
                 return this.Redirect("/Identity/Account/Login");
@@ -46,9 +47,20 @@ namespace WinnersLeague.Web.Controllers
             var currentBet = this.betService.GetCurrentBet(username);
             var odd = this.oddRepository.All().FirstOrDefault(x => x.Id == oddId);
 
-            currentBet.Odds.Add(odd);
-            await this.oddRepository.SaveChangesAsync();
-
+            foreach (var currentOdd in currentBet.Odds)
+            {
+                if (currentOdd.Match == odd.Match)
+                {
+                    isFromTheSameMatch = true;
+                    break;
+                }
+            }
+            if (!isFromTheSameMatch)
+            {
+                currentBet.Odds.Add(odd);
+                await this.oddRepository.SaveChangesAsync();
+            }
+          
             var homeModel = new HomePageViewModel
             {
                 Matches = this.homeService.Matches(),
@@ -71,7 +83,7 @@ namespace WinnersLeague.Web.Controllers
             currentBet.Date = DateTime.UtcNow;
             currentBet.User.Points -= model.BetAmount;
 
-            await this.betService.AddingAmountOfWin(currentBet.User.UserName);
+
             await this.betRepository.SaveChangesAsync();
             var nextCurrentBet = this.betService.GetCurrentBet(currentBet.User.UserName);
 
@@ -122,16 +134,28 @@ namespace WinnersLeague.Web.Controllers
             return this.RedirectToAction("Index", "Home", homeModel);
         }
 
-        public IActionResult Details()
+        public IActionResult Details(string id)
         {
+            var bet = this.betRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
 
+            return this.View(bet);
+        }
 
-            return this.View();
+        [HttpPost]
+        public async Task<IActionResult> TakeAmountOfWin(string betId)
+        {
+            var username = this.User.Identity.Name;
+            var bet = this.betService.GetAll().FirstOrDefault(x => x.Id == betId);
+
+            await this.betService.AddingAmountOfWin(username, betId);
+
+            return this.RedirectToAction("Details", "Bets", bet);
         }
 
         public async Task<IActionResult> All()
         {
-
             var username = this.User.Identity.Name;
             var bets = this.betRepository
                 .All()
@@ -139,10 +163,9 @@ namespace WinnersLeague.Web.Controllers
                 .OrderByDescending(x => x.Date)
                 .ToList();
 
-            await this.betService.AddingAmountOfWin(username);
+            await this.betService.CheckingIsWiningBets();
 
             return this.View(bets);
         }
-
     }
 }

@@ -15,8 +15,10 @@
 
         public string Id { get; set; }
 
-        public bool IsWinning { get; set; } 
+        [Display(Name = "Is Winning")]
+        public bool IsWinning { get; set; }
 
+        [Display(Name = "Bet Amount")]
         [Range(typeof(decimal), "0.40", "79228162514264337593543950335", ErrorMessage = "Value must be at least 0.40")]
         public decimal BetAmount { get; set; }
 
@@ -25,7 +27,8 @@
         public DateTime Date { get; set; }
 
         public virtual WinnersLeagueUser User { get; set; }
-       
+
+        [Display(Name = "Amount Of Win")]
         public decimal AmountOfWin { get; set; }
 
         public bool IsPaid { get; set; }

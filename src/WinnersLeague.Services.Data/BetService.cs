@@ -52,7 +52,9 @@
            var currentbet = new Bet
            {
                IsCurrentBet = true,
-               User = user
+               User = user,
+               IsWinning = false,
+               IsPaid = false
            };
 
            await this.betRepository.AddAsync(currentbet);
@@ -61,38 +63,59 @@
             return currentbet;
         }
 
-        public  async Task AddingAmountOfWin(string username)
+        public async Task AddingAmountOfWin(string username, string betId)
         {
+            var bet = betRepository
+                .All()
+                .FirstOrDefault(x => x.Id == betId);
+
+            var amountOfWin = bet.AmountOfWin;
+
             var user = this.userRepository
                 .All()
                 .FirstOrDefault(x => x.UserName == username);
 
+            user.Points += amountOfWin;
+            bet.IsPaid = true;
+
+            await this.userRepository.SaveChangesAsync();
+        }
+
+        public async Task CalculatingWinRates()
+        {
+            var users = this.userRepository
+                .All()
+                .ToList();
+
+            foreach (var user in users)
+            {
+                decimal winnigBets = user
+                  .Bets
+                  .Where(x => x.IsWinning && !x.IsCurrentBet).Count();
+
+                decimal allBets = user.Bets.Where(x => !x.IsCurrentBet).Count();
+
+                decimal winStats = winnigBets / allBets;
+
+                user.WinStats = winStats * 100;
+            }
+
+            await this.userRepository.SaveChangesAsync();
+        }
+
+        public async Task CheckingIsWiningBets()
+        {
             var bets = this.betRepository.All()
                 .Where(x => !x.IsPaid && !x.IsCurrentBet && x.Odds.Count > 0)
+                .OrderByDescending(x => x.Date)
                 .ToList();
-               
+
             foreach (var bet in bets)
             {
                 bet.IsWinning = bet.Odds.All(x => x.IsWinning);
             }
 
-            var amountOfWin = bets
-                .Sum(x => x.AmountOfWin);
-
-            user.Points += amountOfWin;
-
-            foreach (var bet in bets)
-            {
-                bet.IsPaid = true;
-            }
-            var winStats = (user
-                .Bets
-                .Where(x => x.IsWinning && !x.IsCurrentBet).Count() / 
-                user.Bets.Where(x => !x.IsCurrentBet).Count() * 100);
-
-            user.WinStats = winStats;
-
-            await this.userRepository.SaveChangesAsync();
+            await this.betRepository.SaveChangesAsync();
         }
     }
 }

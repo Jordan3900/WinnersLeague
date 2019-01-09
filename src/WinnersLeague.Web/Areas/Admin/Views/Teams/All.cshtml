@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WinnersLeague.Services.Models.TeamViewModel>
+﻿@model IEnumerable<TeamViewModel>
 
 @{
     ViewData["Title"] = "All";
@@ -41,7 +41,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                <a asp-area="" asp-controller="Teams" asp-action="Details" asp-route-id="@item.Id">Details</a> | 
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
