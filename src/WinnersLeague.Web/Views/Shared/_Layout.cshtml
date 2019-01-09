@@ -45,6 +45,13 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-route="AllMatches">Matches</a>
                 </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle nav-link" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Leaderboards</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a class="nav-link" asp-controller="Leaderboards" asp-action="LeagueList" asp-route-name="Premier League">Premier League</a></li>
+                        <li><a class="nav-link" asp-controller="Leaderboards" asp-action="UsersList">User Leaderboard</a></li>
+                    </ul>
+                </li>
             </ul>
             <partial name="_LoginPartial" />
         </div>

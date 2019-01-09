@@ -9,6 +9,7 @@ using WinnersLeague.Web.Areas.Admin.Models;
 using WinnersLeague.Web.Areas.Admin.Models.ArticleModels;
 using WinnersLeague.Web.Areas.Admin.Models.OddModels;
 using WinnersLeague.Web.Models;
+using WinnersLeague.Web.Models.UserModels;
 
 namespace WinnersLeague.Web
 {
@@ -22,6 +23,10 @@ namespace WinnersLeague.Web
                 .ReverseMap()
                 .ForMember(x => x.Stadium, y => y.Ignore());
 
+            CreateMap<WinnersLeagueUser, UserViewModel>()
+                .ReverseMap()
+               .ForMember(x => x.Avatar, y => y.Ignore());
+
             CreateMap<Match, MatchInputModel>()
                 .ReverseMap()
                 .ForMember(x => x.Odds, y => y.Ignore())
@@ -29,7 +34,6 @@ namespace WinnersLeague.Web
                 .ForMember(x => x.HomeTeam, y => y.Ignore())
                 .ForMember(x => x.AwayTeam, y => y.Ignore())
                 .ForMember(x => x.League, y => y.Ignore());
-
 
             CreateMap<League, LeagueViewModel>().ReverseMap();
 
@@ -50,8 +54,6 @@ namespace WinnersLeague.Web
             CreateMap<Stadium, StadiumViewModel>()
                  .ReverseMap()
                  .ForMember(x => x.Team, y => y.Ignore());
-
-
 
             CreateMap<Odd, OddInputModel>()
                 .ReverseMap()

@@ -36,7 +36,6 @@
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
-
             configuration.CreateMap<Stadium, StadiumViewModel>()
                 .ForMember(x => x.Team,
                     m => m.MapFrom(c => c.Team.Name));
