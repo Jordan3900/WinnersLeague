@@ -32,7 +32,7 @@
         {
             var currentbet = betRepository
                 .All()
-                .FirstOrDefault(x => x.IsCurrentBet);
+                .FirstOrDefault(x => x.IsCurrentBet && username == x.User.UserName);
 
             if (currentbet == null)
             {
