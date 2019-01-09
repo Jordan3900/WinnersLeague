@@ -16,6 +16,12 @@ namespace WinnersLeague.Services.Models
 
         public string Logo { get; set; }
 
+        public int Wins { get; set; }
+
+        public int Losses { get; set; }
+
+        public int Draws { get; set; }
+
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
 

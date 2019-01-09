@@ -1,0 +1,26 @@
+﻿@model TeamViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="text-center">
+            <h2>@Model.Name</h2>
+            <img src="@Url.Content(Model.Logo)" class="avatar rounded-circle img-thumbnail" alt="avatar">
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div class="text-start">
+            <h5>Team Initials: @Model.Initials</h5>
+            <h5>Stadium: @Model?.Stadium</h5>
+            <h5>Wins: @Model.Wins</h5>
+            <h5>Draws: @Model.Draws</h5>
+            <h5>Losses: @Model.Losses</h5>
+        </div>
+    </div>
+</div>
