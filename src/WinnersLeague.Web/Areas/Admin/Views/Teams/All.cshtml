@@ -40,9 +40,9 @@
                <img src="@Url.Content(item.Logo)" alt="logo" width="47" height="47"/> 
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                <a asp-area="" asp-controller="Teams" asp-action="Details" asp-route-id="@item.Id">Details</a> | 
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+
+                <a asp-area="" asp-controller="Teams" asp-action="Details" asp-route-id="@item.Id">Details</a> 
+
             </td>
         </tr>
 }

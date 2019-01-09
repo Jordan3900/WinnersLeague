@@ -68,5 +68,21 @@
 
             return this.RedirectToAction("All", "Stadiums");
         }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var stadiums = this.stadiumRepository
+                .All()
+                .ToList();
+
+            var stadium = stadiums
+                .FirstOrDefault(x => x.Id == id);
+
+            this.stadiumRepository.Delete(stadium);
+
+            await this.stadiumRepository.SaveChangesAsync();
+
+            return RedirectToAction("All", stadiums);
+        }
     }
 }
