@@ -77,6 +77,7 @@
                     {
                         <form asp-controller="Bets" asp-action="Create" asp-route-Id="@Model.MyBet.Id" method="post">
                             <div class="form-group w-50">
+                                <div asp-validation-summary="All" class="text-danger"></div>
                                 <input name="BetAmount" max="@Model.MyBet.User.Points" asp-for="MyBet.BetAmount" type="number" step="0.01" class="form-control" />
                                 <span asp-validation-for="MyBet.BetAmount" class="text-danger"></span>
                             </div>

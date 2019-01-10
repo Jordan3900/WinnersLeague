@@ -67,7 +67,8 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             await this.matchRepository.AddAsync(match);
             await this.matchRepository.SaveChangesAsync();
 
-            return this.RedirectToAction("Create", "All");
+
+            return this.Redirect("/Admin/Matches/All");
         }
 
         public IActionResult Edit(string id)
@@ -115,7 +116,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             this.matchRepository.Delete(match);
             await this.matchRepository.SaveChangesAsync();
 
-            return this.RedirectToAction("All", "Matches");
+            return this.Redirect("/Admin/Matches/All");
         }
     }
 }
