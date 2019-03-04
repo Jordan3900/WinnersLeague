@@ -28,7 +28,24 @@
 
         private static void SandboxCode(IServiceProvider serviceProvider)
         {
-            
+            var arr = new[] { 1, 2, 3, 4, 5 };
+            int biggestEl = int.MinValue;
+
+            Print(5);
+
+            void Print(int index)
+            {
+                if (index == 0)
+                {
+                    return;
+                }
+
+                Console.WriteLine(new string('#', index));
+
+                Print(index - 1);
+
+                Console.WriteLine(new string('*', index));
+            }
         }
 
 
