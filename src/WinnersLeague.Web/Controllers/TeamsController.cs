@@ -24,7 +24,19 @@
                 .FirstOrDefault(x => x.Id == id);
 
 
-            return View(team);
+            return this.View(team);
+        } 
+
+        public IActionResult All(string searchText)
+        {
+            searchText = searchText ?? "";
+            searchText = searchText.Trim();
+
+            var teams = this.teamService.GetAll()
+                .Where(x => x.Name.ToLower()
+                .Contains(searchText.ToLower()));
+
+            return this.View(teams);
         }
     }
 }

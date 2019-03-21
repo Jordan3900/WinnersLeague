@@ -38,7 +38,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
             var matches = this.matchService.GetAll();
 
 
-            return View(matches);
+            return this.View(matches);
         }
 
         public IActionResult Create()
@@ -49,7 +49,7 @@ namespace WinnersLeague.Web.Areas.Admin.Controllers
 
             this.ViewData["Teams"] = teamNames;
 
-            return View();
+            return this.View();
         }
 
         [HttpPost]

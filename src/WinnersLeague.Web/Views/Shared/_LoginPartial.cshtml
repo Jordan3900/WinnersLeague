@@ -6,6 +6,10 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    <form class="form-inline ml-auto" method="get" asp-controller="teams" asp-action="all">
+        <input class="form-control mr-sm-2" name="searchText" type="search" placeholder="Search for a team..." aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="ml-auto">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
